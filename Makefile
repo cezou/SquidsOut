@@ -20,7 +20,7 @@ SRCS = $(S_DIR)/*.c
 LIBFT = $(L_DIR)/libft.a
 MLX = $(MLX_DIR)/libmlx.a
 INCS = $(LIBFT) $(MLX)
-HEAD = $(I_DIR)/so_long.h
+HEAD = $(I_DIR)/$(NAME).h
 
 # TEXT
 RED = \033[1;31m
@@ -32,20 +32,24 @@ CYAN = \033[1;36m
 WHITE = \033[1;37m
 PURPLE = \033[38;5;105m
 PINK = \033[38;5;206m
-
 BOLD = \033[1m
 UNDERLINE = \033[4m
 RESET = \033[0m
-
 UP = \033[1A
 ERASE = \033[0J
 
-all : MLX QuoicouLibft $(NAME)
+all : $(MLX) $(LIBFT) $(NAME) launch
 
-MLX:
+v: $(MLX) $(LIBFT) $(NAME)
+	@valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME)
+
+launch:
+	@./$(NAME)
+
+$(MLX):
 	@make --silent -C $(MLX_DIR)
 
-QuoicouLibft:
+$(LIBFT):
 	@make --silent -C $(L_DIR)
 
 $(NAME): $(SRCS) $(LIBFT)
@@ -53,16 +57,14 @@ $(NAME): $(SRCS) $(LIBFT)
 	@echo "$(GREEN)  ● Made SoLong$(RESET)"
 
 clean:
-	@rm -f $(NAME)
+	@if [ -f $(NAME) ]; then \
+			rm -f $(NAME); \
+			echo "$(PINK)  ● Adios Squidos 🦑$(RESET)"; \
+	fi
 
 fclean:
 	@make --silent fclean -C $(L_DIR)
-	@if [ -f $(NAME) ]; then \
-			make --silent fclean_no_check; \
-	fi
-
-fclean_no_check: clean
-	@echo "$(PINK)    Adios Squidos 🦑$(RESET)"
+	@make --silent clean
 
 re : fclean all
 

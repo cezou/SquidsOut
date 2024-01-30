@@ -1,21 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/29 18:56:55 by cviegas           #+#    #+#             */
-/*   Updated: 2024/01/30 17:45:20 by cviegas          ###   ########.fr       */
+/*   Created: 2024/01/30 17:40:31 by cviegas           #+#    #+#             */
+/*   Updated: 2024/01/30 17:40:39 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/squids_out.h"
 
-int	main(void)
+int	clean_and_exit_game(t_mlx *m, bool fail)
 {
-	t_mlx	m;
+	mlx_destroy_image(m->mlx, m->game.spr.bg.img);
+	mlx_destroy_window(m->mlx, m->mlx_win);
+	mlx_destroy_display(m->mlx);
+	free(m->mlx);
+	if (!fail)
+		exit(EXIT_SUCCESS);
+	else
+		exit(EXIT_FAILURE);
+}
 
-	m.mlx = mlx_init();
-	init_game(&m);
+int	exit_game(t_mlx *m)
+{
+	return (clean_and_exit_game(m, EXIT_SUCCESS));
 }
