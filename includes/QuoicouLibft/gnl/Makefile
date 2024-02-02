@@ -1,14 +1,16 @@
-# Makefile de mon get_next_line en respectant la norme de 42 (pas de wildcards par exemple)
-
+# PATH : /libft
 NAME = gnl.a
 
+# COMPILATION
+CC = cc 
+FLAGS = -Wall -Wextra -Werror
+
+# FILES
 SRC = get_next_line.c \
 		get_next_line_utils.c
 OBJ = $(SRC:.c=.o)
 
-CC = cc 
-FLAGS = -Wall -Wextra -Werror
-
+# TEXT
 UP = \033[1A
 ERASE = \033[0J
 

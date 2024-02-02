@@ -16,11 +16,11 @@ L_DIR = $(I_DIR)/QuoicouLibft
 MLX_DIR = $(I_DIR)/minilibx-linux
 
 # FILES
-SRCS = $(S_DIR)/*.c
+SRCS = $(S_DIR)/*.c 
 LIBFT = $(L_DIR)/libft.a
 MLX = $(MLX_DIR)/libmlx.a
 INCS = $(LIBFT) $(MLX)
-HEAD = $(I_DIR)/$(NAME).h
+HEAD = ./$(I_DIR)/squids_out.h
 
 # TEXT
 RED = \033[1;31m
@@ -38,13 +38,13 @@ RESET = \033[0m
 UP = \033[1A
 ERASE = \033[0J
 
-all : $(MLX) $(LIBFT) $(NAME) launch
+all : $(MLX) $(LIBFT) $(NAME)
 
 v: $(MLX) $(LIBFT) $(NAME)
 	@valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME)
 
 launch:
-	@./$(NAME)
+	@./$(NAME) $1
 
 $(MLX):
 	@make --silent -C $(MLX_DIR)
@@ -52,14 +52,14 @@ $(MLX):
 $(LIBFT):
 	@make --silent -C $(L_DIR)
 
-$(NAME): $(SRCS) $(LIBFT)
-	@$(CC) $(CFLAGS) $(MLXFLAGS) $(SRCS) $(INCS) -I${HEAD} -o $(NAME)
+$(NAME): $(SRCS) $(LIBFT) $(HEAD)
+	@$(CC) $(CFLAGS) $(MLXFLAGS) -I${I_DIR} $(SRCS) $(INCS) -o $(NAME)
 	@echo "$(GREEN)  ● Made SoLong$(RESET)"
 
 clean:
 	@if [ -f $(NAME) ]; then \
 			rm -f $(NAME); \
-			echo "$(PINK)  ● Adios Squidos 🦑$(RESET)"; \
+			echo "$(BOLD)$(PINK)  ● Adios Squidos 🦑$(RESET)"; \
 	fi
 
 fclean:

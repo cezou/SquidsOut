@@ -1,30 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit.c                                             :+:      :+:    :+:   */
+/*   open_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/30 17:40:31 by cviegas           #+#    #+#             */
-/*   Updated: 2024/01/30 19:02:25 by cviegas          ###   ########.fr       */
+/*   Created: 2024/02/02 17:38:25 by cviegas           #+#    #+#             */
+/*   Updated: 2024/02/02 18:02:46 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/squids_out.h"
+#include "../../includes/squids_out.h"
 
-int	clean_and_exit_game(t_mlx *m, bool fail)
+bool	create_map(char **map, char *)
 {
-	mlx_destroy_image(m->mlx, m->game.spr.bg.img);
-	mlx_destroy_window(m->mlx, m->mlx_win);
-	mlx_destroy_display(m->mlx);
-	free(m->mlx);
-	if (!fail)
-		exit(EXIT_SUCCESS);
-	else
-		exit(EXIT_FAILURE);
-}
-
-int	exit_game(t_mlx *m)
-{
-	return (clean_and_exit_game(m, EXIT_SUCCESS));
 }

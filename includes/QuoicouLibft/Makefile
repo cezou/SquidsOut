@@ -1,5 +1,34 @@
+# PATH : /
 NAME = libft.a
 
+# FILES
+GD = gnl
+PD = printfd
+MD = minmax
+LD = libft
+G = $(GD).a
+P = libftprintf.a
+M = $(MD).a
+L = $(LD).a
+H = ./libft.h
+
+# COMMANDS
+MS = make --silent
+MFCLEAN = make --silent fclean -C
+
+# TEXT
+RED = \033[1;31m
+GREEN = \033[1;32m
+YELLOW = \033[1;33m
+BLUE = \033[1;34m
+MAGENTA = \033[1;35m
+CYAN = \033[1;36m
+WHITE = \033[1;37m
+PURPLE = \033[38;5;105m
+PINK = \033[38;5;206m
+BOLD = \033[1m
+UNDERLINE = \033[4m
+RESET = \033[0m
 UP = \033[1A
 ERASE = \033[0J
 
@@ -7,57 +36,57 @@ all: check_libft
 
 check_libft:
 	@if [ ! -f $(NAME) ]; then \
-			make --silent making; \
-			make --silent $(NAME); \
-			make --silent echo; \
-			make --silent oclean; \
+			$(MS) making; \
+			$(MS) $(NAME); \
+			$(MS) echo; \
+			$(MS) oclean; \
 	fi
 
 $(NAME):
-	@make --silent -C gnl
-	@make --silent -C printfd
-	@make --silent -C minmax
-	@cp printfd/libftprintf.a $(NAME)
-	@cp gnl/gnl.a .
-	@cp minmax/minmax.a .
-	@ar x gnl.a
-	@ar x minmax.a
+	@$(MS) -C $(GD)
+	@$(MS) -C $(PD)
+	@$(MS) -C $(MD)
+	@cp $(PD)/$(P) $(NAME)
+	@cp $(GD)/$(G) .
+	@cp $(MD)/$(M) .
+	@ar x $(G)
+	@ar x $(M)
 	@ar rc $(NAME) *.o
 	@rm *.o
-	@rm gnl.a
-	@rm minmax.a
+	@rm $(G)
+	@rm $(M)
 
 echo:
-	@echo "$(UP)$(UP)$(ERASE)\033[1;32mMade QuoicouLibft :)\033[0m"
+	@echo "$(UP)$(UP)$(ERASE)$(GREEN)Made QuoicouLibft :)$(RESET)"
 
 making:
-	@echo "\033[1;35m🦑🦑🦑 Making QuoicouLibft... 🦑🦑🦑\033[0m"
+	@echo "$(GREEN)🦑🦑🦑 Making QuoicouLibft... 🦑🦑🦑$(RESET)"
 
 oclean:
-	@make --silent fclean -C ./libft
-	@make --silent fclean -C ./gnl
-	@make --silent fclean -C ./printfd
-	@make --silent fclean -C ./minmax
+	@$(MFCLEAN) $(LD)
+	@$(MFCLEAN) $(GD)
+	@$(MFCLEAN) $(PD)
+	@$(MFCLEAN) $(MD)
 
 clean: clean_o clean_a 
-	@echo "\033[35m🦑🦑🦑 Crampting QuoicouLibft... 🦑🦑🦑\033[0m"
-	@make --silent fclean -C ./libft
-	@echo "\033[31m          Redlight FIRST LIBFT!\033[0m"
-	@make --silent fclean -C ./gnl
-	@echo "$(UP)$(ERASE)\033[31m              Redlight GNL!\033[0m"
-	@make --silent fclean -C ./printfd
-	@echo "$(UP)$(ERASE)\033[31m            Redlight PRINTFs!\033[0m"
-	@make --silent fclean -C ./minmax
-	@echo "$(UP)$(ERASE)\033[31m            Redlight MINMAX!\033[0m"
+	@echo "$(BOLD)$(PINK)🦑🦑🦑 Crampting QuoicouLibft... 🦑🦑🦑$(RESET)"
+	@$(MFCLEAN) $(LD)
+	@echo "$(PINK)         Redlight FIRST LIBFT!$(RESET)"
+	@$(MFCLEAN) $(GD)
+	@echo "$(UP)$(ERASE)$(PINK)              Redlight GNL!$(RESET)"
+	@$(MFCLEAN) $(PD)
+	@echo "$(UP)$(ERASE)$(PINK)            Redlight PRINTFs!$(RESET)"
+	@$(MFCLEAN) $(MD)
+	@echo "$(UP)$(ERASE)$(PINK)            Redlight MINMAX!$(RESET)"
 
 fclean:
 	@if [ -f $(NAME) ]; then \
-			make --silent fclean_no_check; \
+			$(MS) fclean_no_check; \
 	fi
 
 fclean_no_check: clean
 	@rm -f $(NAME) 
-	@echo "$(UP)$(UP)$(ERASE)\033[1;31mQuoicouLibft crampted :(\033[0m"
+	@echo "$(UP)$(UP)$(ERASE)$(BOLD)$(PINK)QuoicouLibft crampted :($(RESET)"
 
 re: fclean all
 
@@ -65,4 +94,4 @@ clean_o:
 	@rm -f *.o
 
 clean_a:
-	@rm -f gnl.a libftprintf.a minmax.a
+	@rm -f $(G) $(P) $(M)

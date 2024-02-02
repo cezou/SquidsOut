@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 18:58:17 by cviegas           #+#    #+#             */
-/*   Updated: 2024/01/30 17:44:16 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/02/02 18:33:52 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,4 +70,9 @@ int				exit_game(t_mlx *m);
 void			events(t_mlx *m);
 int				key_events(int keysym, t_mlx *m);
 
+// DEFINE COLORS FOR PRINTF IN STRINGS:
+# define BOLD "\033[1m"
+# define RED "\033[31m"
+# define GREEN "\033[32m"
+# define RESET "\033[0m"
 #endif

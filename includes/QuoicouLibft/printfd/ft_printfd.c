@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 17:16:18 by cviegas           #+#    #+#             */
-/*   Updated: 2024/01/13 19:12:58 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/02/02 18:28:22 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,38 +83,8 @@ void	v_printfd(int fd, const char *s, ...)
 	va_end(ap);
 }
 
-// #include <stdio.h>
-// #include <stdlib.h>
-
-// int	main(int ac, char **av)
-// {
-// 	char *null_str = NULL;
-
-// 	// Everything
-// 	printf("EVERYTHING\n\n");
-// 	ft_printf("10%%squid %s game %u %c %c\n", "abon", 99999999, '!', 'a');
-// 	printf("10%%squid %s game %u %c %c\n", "abon", 99999999, '!', 'a');
-
-// 	printf("\nHEXA\n\n");
-// 	ft_printf(" nombre de char %d\n", ft_printf(" %x\n", 1234567));
-// 	printf(" nombre de char %d\n", printf(" %x\n", 1234567));
-
-// 	ft_printf(" nombre de char %d\n", ft_printf(" %x\n", 1234567));
-// 	printf(" nombre de char %d\n", printf(" %x\n", 1234567));
-
-// 	// NULL
-// 	printf("\nNULL\n\n");
-
-// 	printf("%d\n", printf("%s\n", null_str));
-// 	ft_printf("%d\n", ft_printf("%s\n", null_str));
-
-// 	printf(" %d", printf("%p\n", null_str));
-// 	ft_printf(" %d", ft_printf("%p\n", null_str));
-// 	(void) ac;
-// 	(void) av;
-// 	// 0
-
-// 	printf("\n\nZERO\n\n");
-// 	printf("%d\n", printf(0));
-// 	ft_printf("%d\n", ft_printf(0));
-// }
+/* Prints a bold red string ended with a return on the standard error */
+void	perr(const char *s)
+{
+	ft_printfd(STDERR_FILENO, "%s%s%s%s\n", BOLD, RED, s, RESET);
+}

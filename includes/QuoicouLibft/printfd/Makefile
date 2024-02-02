@@ -1,11 +1,15 @@
+# PATH : /printfd
 NAME		= libftprintf.a
 
+# COMPILATION
 CC			= cc
 CFLAGS		= -Wall -Wextra -Werror
 
+# FILES
 SRCS		= ft_printfd.c ft_printf.c ft_putunsigned.c ft_putaddr.c ft_puthexa.c
 OBJS		= $(SRCS:.c=.o)
 
+# TEXT
 UP = \033[1A
 ERASE = \033[0J
 

@@ -1,6 +1,4 @@
-# inspire toi du makefile de gnl (/home/cviegas/Documents/adventofcode/libft/gnl/Makefile)
-
-# Path: libft/minmax/Makefile
+# Path: /minmax
 
 NAME = minmax.a
 
@@ -13,7 +11,7 @@ FLAGS = -Wall -Wextra -Werror
 UP = \033[1A
 ERASE = \033[0J
 
-all: ccc $(NAME) echo clean
+all: ccc $(NAME) echo
 
 $(NAME): $(OBJ)
 	@ar rc $@ $^
