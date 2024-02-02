@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 18:58:17 by cviegas           #+#    #+#             */
-/*   Updated: 2024/02/02 18:33:52 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/02/02 19:22:01 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,9 @@ int				exit_game(t_mlx *m);
 /* 	Events */
 void			events(t_mlx *m);
 int				key_events(int keysym, t_mlx *m);
+
+/* Map Handling */
+void			handle_map(const char *file);
 
 // DEFINE COLORS FOR PRINTF IN STRINGS:
 # define BOLD "\033[1m"

@@ -16,7 +16,7 @@ L_DIR = $(I_DIR)/QuoicouLibft
 MLX_DIR = $(I_DIR)/minilibx-linux
 
 # FILES
-SRCS = $(S_DIR)/*.c 
+SRCS = $(S_DIR)/*.c $(S_DIR)/map_handling/*.c
 LIBFT = $(L_DIR)/libft.a
 MLX = $(MLX_DIR)/libmlx.a
 INCS = $(LIBFT) $(MLX)

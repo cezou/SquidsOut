@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 15:33:49 by cviegas           #+#    #+#             */
-/*   Updated: 2024/02/02 18:28:06 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/02/02 19:00:06 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ int		ft_putunsigned_fd(unsigned int n, int fd);
 int		ft_putaddr_fd(void *addr, int fd);
 int		ft_puthexa_min_fd(unsigned long long hexa, int fd);
 int		ft_puthexa_max_fd(unsigned long long hexa, int fd);
+
+void	ft_print_s(const char **split);
 
 /* Prints a bold red string ended with a return on the standard error */
 void	perr(const char *s);
