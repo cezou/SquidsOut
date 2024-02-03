@@ -6,25 +6,31 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 17:40:31 by cviegas           #+#    #+#             */
-/*   Updated: 2024/01/30 19:02:25 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/02/03 17:11:46 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/squids_out.h"
 
-int	clean_and_exit_game(t_mlx *m, bool fail)
+void	free_game(t_game *g)
 {
-	mlx_destroy_image(m->mlx, m->game.spr.bg.img);
-	mlx_destroy_window(m->mlx, m->mlx_win);
-	mlx_destroy_display(m->mlx);
-	free(m->mlx);
-	if (!fail)
-		exit(EXIT_SUCCESS);
-	else
-		exit(EXIT_FAILURE);
+	if (g->map.block)
+		free_s(g->map.block);
 }
 
-int	exit_game(t_mlx *m)
+int	clean_and_exit_game(t_game *g, bool fail)
 {
-	return (clean_and_exit_game(m, EXIT_SUCCESS));
+	mlx_destroy_image(g->mlx, g->spr->bg.img);
+	mlx_destroy_window(g->mlx, g->mlx_win);
+	mlx_destroy_display(g->mlx);
+	free(g->mlx);
+	if (!fail)
+		exit(SUCCESS);
+	else
+		exit(FAIL);
+}
+
+int	exit_game(t_game *g)
+{
+	return (clean_and_exit_game(g, EXIT_SUCCESS));
 }

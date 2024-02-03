@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 18:58:17 by cviegas           #+#    #+#             */
-/*   Updated: 2024/02/02 19:22:01 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/02/03 18:21:13 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,17 +24,10 @@
 # include <unistd.h>
 # define W_WIDTH 1920
 # define W_HEIGHT 1080
-
-enum
-{
-	ON_KEYDOWN = 2,
-	ON_KEYUP = 3,
-	ON_MOUSEDOWN = 4,
-	ON_MOUSEUP = 5,
-	ON_MOUSEMOVE = 6,
-	ON_EXPOSE = 12,
-	ON_DESTROY = 17
-};
+# define NU NULL
+# define STDERR STDERR_FILENO
+# define FAIL EXIT_FAILURE
+# define SUCCESS EXIT_SUCCESS
 
 typedef struct s_img
 {
@@ -48,34 +41,56 @@ typedef struct s_sprites
 	t_img		bg;
 }				t_sprites;
 
-typedef struct s_game
+typedef struct s_map
 {
-	t_sprites	spr;
-}				t_game;
+	char		**block;
+	float		**pos;
+}				t_map;
 
-typedef struct s_mlx
+typedef struct s_game
 {
 	void		*mlx;
 	void		*mlx_win;
-	t_game		game;
-}				t_mlx;
+	t_sprites	*spr;
+	t_map		map;
+}				t_game;
 
 /* FUNCTIONS */
 /* 	Game Handling */
-void			init_game(t_mlx *m);
-int				clean_and_exit_game(t_mlx *m, bool fail);
-int				exit_game(t_mlx *m);
+void			init_game(t_game *g);
+void			init_window(t_game *g);
+int				clean_and_exit_game(t_game *g, bool fail);
+void			free_game(t_game *g);
+int				exit_game(t_game *g);
 
 /* 	Events */
-void			events(t_mlx *m);
-int				key_events(int keysym, t_mlx *m);
+void			events(t_game *g);
+int				key_events(int keysym, t_game *g);
 
 /* Map Handling */
-void			handle_map(const char *file);
+void			handle_map(const char *file, t_game *g);
+char			**create_map(const char *filename);
+bool			is_valid_map(char **map);
+
+/* Utils */
+
+void			merr(const char *s);
 
 // DEFINE COLORS FOR PRINTF IN STRINGS:
 # define BOLD "\033[1m"
 # define RED "\033[31m"
 # define GREEN "\033[32m"
 # define RESET "\033[0m"
+
+// enum
+// {
+// 	ON_KEYDOWN = 2,
+// 	ON_KEYUP = 3,
+// 	ON_MOUSEDOWN = 4,
+// 	ON_MOUSEUP = 5,
+// 	ON_MOUSEMOVE = 6,
+// 	ON_EXPOSE = 12,
+// 	ON_DESTROY = 17
+// };
+
 #endif
