@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 17:16:18 by cviegas           #+#    #+#             */
-/*   Updated: 2024/02/03 18:18:30 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/02/04 20:19:01 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,17 +86,11 @@ int	ft_printf(const char *s, ...)
 // Prints a char **
 void	print_s(char **split)
 {
-	size_t	i;
+	int	i;
 
 	if (!split)
 		return ;
-	i = 0;
-	while (split[i])
-	{
-		ft_printf("%s", split[i]);
-		// if (split[i + 1])
-		// 	ft_printf(" ");
-		i++;
-	}
-	ft_printf("\n");
+	i = -1;
+	while (split[++i])
+		ft_printf("%d: %s\n", i, split[i]);
 }
