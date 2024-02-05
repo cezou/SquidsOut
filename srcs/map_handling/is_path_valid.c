@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 15:08:33 by cviegas           #+#    #+#             */
-/*   Updated: 2024/02/05 15:32:47 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/02/05 17:13:55 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ bool	**turn_map_into_bool(char **map)
 	i = 0;
 	while (map[i])
 	{
-		wall_or_not[i] = malloc(sizeof(bool) * ft_strlen(map));
+		wall_or_not[i] = malloc(sizeof(bool) * ft_strlen(map[i]));
 		if (!wall_or_not[i])
-			return (merr("Malloc failed"), protected_a_free((void **)map), 0);
+			return (merr("Malloc failed"), protected_a_free((void **)map), NU);
 		j = 0;
 		while (map[i][j])
 		{
@@ -50,20 +50,34 @@ bool	**turn_map_into_bool(char **map)
 	return (wall_or_not);
 }
 
-bool	is_path_valid(bool **map)
+void	print_bool_a(bool **map, char **chars)
+{
+	size_t	i;
+	size_t	j;
+
+	i = 0;
+	while (chars[i])
+	{
+		j = 0;
+		while (chars[i][j])
+		{
+			ft_printf("%d", map[i][j]);
+			j++;
+		}
+		ft_printf("\n");
+		i++;
+	}
+}
+
+bool	is_path_valid(char **map)
 {
 	bool	**wall_or_not;
 
 	wall_or_not = turn_map_into_bool(map);
 	if (!wall_or_not)
 		return (0);
-}
-
-void	print_bool_a(bool **map)
-{
-	size_t	i;
-
-	i = 0;
+	print_bool_a(wall_or_not, map);
+	return (1);
 }
 
 // fun **map *valid, int *tab Coord
