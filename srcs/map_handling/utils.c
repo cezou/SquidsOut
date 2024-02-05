@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 17:38:25 by cviegas           #+#    #+#             */
-/*   Updated: 2024/02/05 18:31:51 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/02/05 19:06:36 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,17 +32,6 @@ void	print_bool_a(bool **map, char **chars)
 		ft_printf("\n");
 		i++;
 	}
-}
-size_t	*pos_dup(size_t *pos)
-{
-	size_t	*dup;
-
-	dup = malloc(sizeof(size_t) * 2);
-	if (!dup)
-		return (merr("Malloc failed"), NULL);
-	dup[0] = pos[0];
-	dup[1] = pos[1];
-	return (dup);
 }
 
 size_t	a_len(char **array)

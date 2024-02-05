@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 18:58:17 by cviegas           #+#    #+#             */
-/*   Updated: 2024/02/05 18:32:40 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/02/05 19:11:51 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,15 @@ bool			is_there_unvalid_chars(char **map);
 void			it_contains_everything(char **map, bool *valid);
 bool			is_path_valid(char **map);
 
+typedef struct s_map_data
+{
+	bool		**map;
+	char		**char_map;
+	size_t		x;
+	size_t		y;
+	bool		found_it;
+}				t_map_data;
+
 /* Utils */
 
 void			merr(const char *s);
@@ -85,8 +94,8 @@ void			protected_free(void *p);
 void			protected_a_free(void **p);
 void			print_bool_a(bool **map, char **chars);
 size_t			a_len(char **array);
-size_t			*pos_dup(size_t *pos);
-// DEFINE COLORS FOR PRINTF IN STRINGS:
+
+/* Define colors for printf in strings */
 # define BOLD "\033[1m"
 # define RED "\033[31m"
 # define GREEN "\033[32m"

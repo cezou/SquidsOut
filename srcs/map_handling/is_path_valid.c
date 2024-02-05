@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 15:08:33 by cviegas           #+#    #+#             */
-/*   Updated: 2024/02/05 18:46:10 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/02/05 20:41:57 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,59 +68,100 @@ size_t	*player_starting_position(char **map)
 	return (NULL);
 }
 
-bool	search_for_exit(bool **map, char **char_map, size_t x, size_t y)
+void	search_for_something(t_map_data *m, int x, int y, char to_find)
 {
-	if (char_map[x][y] == 'E')
-		return (1);
-	if (map[x][y])
+	if (m->char_map[x][y] == to_find || m->found_it)
+	{
+		m->map[x][y] = 1;
+		m->found_it = 1;
+		return ;
+	}
+	if (m->map[x][y])
+		return ;
+	m->map[x][y] = 1;
+	if (!m->map[x + 1][y] && m->char_map[x + 1][y])
+		search_for_something(m, ++x, y, to_find);
+	if (!m->map[x - 1][y] && (x - 1 > 0))
+		search_for_something(m, --x, y, to_find);
+	if (!m->map[x][y + 1] && m->char_map[x][y + 1])
+		search_for_something(m, x, ++y, to_find);
+	if (!m->map[x][y - 1] && (y - 1 > 0))
+		search_for_something(m, x, --y, to_find);
+}
+
+bool	init_map_data(char **map, t_map_data *m)
+{
+	size_t	*player_pos;
+
+	m->char_map = map;
+	m->map = turn_map_into_bool(map);
+	if (!m->map)
 		return (0);
-	map[x][y] = 1;
-	if (!map[x + 1][y] && char_map[x + 1][y])
-	{
-		ft_printf(" |\n");
-		ft_printf(" v\n");
-		search_for_exit(map, char_map, x + 1, y);
-	}
-	if (!map[x - 1][y] && (x - 1 > 0))
-	{
-		ft_printf(" A\n");
-		ft_printf(" |\n");
-		search_for_exit(map, char_map, x - 1, y);
-	}
-	if (!map[x][y + 1] && char_map[x][y + 1])
-	{
-		ft_printf(" -->\n");
-		search_for_exit(map, char_map, x, y + 1);
-	}
-	if (!map[x][y - 1] && (y - 1 > 0))
-	{
-		ft_printf(" <--\n");
-		search_for_exit(map, char_map, x, y - 1);
-	}
-	return (0);
+	player_pos = player_starting_position(map);
+	if (!player_pos)
+		return (protected_a_free((void **)m->map), 0);
+	m->x = player_pos[0];
+	m->y = player_pos[1];
+	protected_free(player_pos);
+	m->found_it = 0;
+	return (1);
 }
 
 bool	is_path_valid(char **map)
 {
-	bool	**wall_or_not;
-	bool	valid_path;
-	size_t	*player_pos;
+	t_map_data	map_data;
 
-	wall_or_not = turn_map_into_bool(map);
-	if (!wall_or_not)
+	if (!init_map_data(map, &map_data))
 		return (0);
-	player_pos = player_starting_position(map);
-	if (!player_pos)
-		return (protected_a_free((void **)wall_or_not), 0);
-	valid_path = 0;
-	search_for_exit(wall_or_not, map, player_pos[0], player_pos[1]);
-	print_bool_a(wall_or_not, map);
+	search_for_something(&map_data, map_data.x, map_data.y, 'E');
+	if (!map_data.found_it)
+		merr("Player can't find the exit");
+	print_bool_a(map_data.map, map);
 	ft_printf("\n");
 	print_s(map);
-	protected_a_free((void **)wall_or_not);
-	protected_free(player_pos);
-	return (valid_path);
+	protected_a_free((void **)map_data.map);
+	return (map_data.found_it);
 }
+
+// void	search_for_exit(t_map_data *m, int x, int y)
+// {
+// 	if (m->char_map[x][y] == 'E' || m->found_it)
+// 	{
+// 		m->map[x][y] = 1;
+// 		m->found_it = 1;
+// 		return ;
+// 	}
+// 	if (m->map[x][y])
+// 		return ;
+// 	m->map[x][y] = 1;
+// 	ft_printf("Player pos: x: %d, y: %d\n", x, y);
+// 	if (!m->map[x + 1][y] && m->char_map[x + 1][y])
+// 	{
+// 		ft_printf(" |\n");
+// 		ft_printf(" v\n");
+// 		x++;
+// 		search_for_exit(m, x, y);
+// 	}
+// 	if (!m->map[x - 1][y] && (x - 1 > 0))
+// 	{
+// 		ft_printf(" A\n");
+// 		ft_printf(" |\n");
+// 		x--;
+// 		search_for_exit(m, x, y);
+// 	}
+// 	if (!m->map[x][y + 1] && m->char_map[x][y + 1])
+// 	{
+// 		ft_printf(" -->\n");
+// 		y++;
+// 		search_for_exit(m, x, y);
+// 	}
+// 	if (!m->map[x][y - 1] && (y - 1 > 0))
+// 	{
+// 		ft_printf(" <--\n");
+// 		y--;
+// 		search_for_exit(m, x, y--);
+// 	}
+// }
 
 // fun **map *valid, int *tab Coord
 // if (coord == sortie || coord out)
