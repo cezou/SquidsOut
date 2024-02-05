@@ -65,6 +65,7 @@ clean:
 fclean:
 	@make --silent fclean -C $(L_DIR)
 	@make --silent clean
+	@make --silent clean -C $(MLX_DIR)
 
 re : fclean all
 

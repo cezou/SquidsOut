@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 18:58:17 by cviegas           #+#    #+#             */
-/*   Updated: 2024/02/03 18:21:13 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/02/05 11:02:37 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ typedef struct s_game
 
 /* FUNCTIONS */
 /* 	Game Handling */
+
 void			init_game(t_game *g);
 void			init_window(t_game *g);
 int				clean_and_exit_game(t_game *g, bool fail);
@@ -64,17 +65,23 @@ void			free_game(t_game *g);
 int				exit_game(t_game *g);
 
 /* 	Events */
+
 void			events(t_game *g);
 int				key_events(int keysym, t_game *g);
 
 /* Map Handling */
+
 void			handle_map(const char *file, t_game *g);
 char			**create_map(const char *filename);
 bool			is_valid_map(char **map);
+bool			is_there_unvalid_chars(char **map);
+void			it_contains_everything(char **map, bool *valid);
 
 /* Utils */
 
 void			merr(const char *s);
+void			protected_free(void *p);
+void			protected_a_free(void **p);
 
 // DEFINE COLORS FOR PRINTF IN STRINGS:
 # define BOLD "\033[1m"
