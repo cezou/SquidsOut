@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 17:37:24 by cviegas           #+#    #+#             */
-/*   Updated: 2024/02/05 11:17:28 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/02/05 12:08:20 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,14 @@
 
 void	init_game(t_game *g)
 {
+	g->spr = malloc(sizeof(t_sprites));
+	if (!g->spr)
+		return (exit(FAIL));
+	g->spr->bg.img = NULL;
 	g->map.block = NU;
 	g->map.pos = NU;
+	g->mlx_win = NU;
+	g->mlx = NU;
 }
 
 static t_img	init_img(t_game *g, const char *path)

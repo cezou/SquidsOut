@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 17:40:31 by cviegas           #+#    #+#             */
-/*   Updated: 2024/02/05 11:10:11 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/02/05 12:06:58 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,21 @@
 void	free_game(t_game *g)
 {
 	protected_a_free((void **)g->map.block);
+	protected_free(g->spr);
 }
 
 int	clean_and_exit_game(t_game *g, bool fail)
 {
-	mlx_destroy_image(g->mlx, g->spr->bg.img);
-	mlx_destroy_window(g->mlx, g->mlx_win);
-	mlx_destroy_display(g->mlx);
-	protected_free(g->mlx);
+	if (g->spr->bg.img)
+		mlx_destroy_image(g->mlx, g->spr->bg.img);
+	if (g->mlx_win)
+		mlx_destroy_window(g->mlx, g->mlx_win);
+	if (g->mlx)
+	{
+		mlx_destroy_display(g->mlx);
+		protected_free(g->mlx);
+	}
+	free_game(g);
 	if (!fail)
 		exit(SUCCESS);
 	else
