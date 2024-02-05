@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 16:15:28 by cviegas           #+#    #+#             */
-/*   Updated: 2024/02/04 21:24:48 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/02/05 15:17:10 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static void	open_map(const char *filename, int *fd, size_t *i)
 	*i = 0;
 }
 
-void	error_if_empty_line(char **map, int *fd, int i)
+static void	error_if_empty_line(char **map, int *fd, int i)
 {
 	if (map[i][0] != '\n' && map[i][0])
 		return ;
