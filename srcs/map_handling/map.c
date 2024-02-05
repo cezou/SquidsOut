@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 17:38:25 by cviegas           #+#    #+#             */
-/*   Updated: 2024/02/04 20:36:13 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/02/05 17:16:30 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,6 @@ void	handle_map(const char *file, t_game *g)
 	g->map.block = create_map(file);
 	if (!g->map.block)
 		return (exit(FAIL));
-	if (!is_valid_map(g->map.block))
+	if (!is_map_valid(g->map.block))
 		return (free_game(g), exit(FAIL));
 }

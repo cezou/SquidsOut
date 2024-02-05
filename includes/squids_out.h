@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 18:58:17 by cviegas           #+#    #+#             */
-/*   Updated: 2024/02/05 15:17:15 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/02/05 18:32:40 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,16 +73,19 @@ int				key_events(int keysym, t_game *g);
 
 void			handle_map(const char *file, t_game *g);
 char			**create_map(const char *filename);
-bool			is_valid_map(char **map);
+bool			is_map_valid(char **map);
 bool			is_there_unvalid_chars(char **map);
 void			it_contains_everything(char **map, bool *valid);
+bool			is_path_valid(char **map);
 
 /* Utils */
 
 void			merr(const char *s);
 void			protected_free(void *p);
 void			protected_a_free(void **p);
-
+void			print_bool_a(bool **map, char **chars);
+size_t			a_len(char **array);
+size_t			*pos_dup(size_t *pos);
 // DEFINE COLORS FOR PRINTF IN STRINGS:
 # define BOLD "\033[1m"
 # define RED "\033[31m"

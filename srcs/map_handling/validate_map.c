@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 16:21:19 by cviegas           #+#    #+#             */
-/*   Updated: 2024/02/05 11:05:57 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/02/05 18:11:38 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,11 @@ static bool	is_surrounded_by_walls(char **map)
 	return (1);
 }
 
-bool	is_valid_map(char **map)
+bool	is_map_valid(char **map)
 {
 	bool	valid;
 
 	valid = 1;
-	print_s(map);
 	if (!is_rectangle(map))
 		(merr("It isn't a rectangle"), valid = 0);
 	if (is_there_unvalid_chars(map))
@@ -78,9 +77,9 @@ bool	is_valid_map(char **map)
 			(merr("It isn't surrounded by walls"), valid = 0);
 		it_contains_everything(map, &valid);
 	}
-	// if (valid)
-	// 	if (!is_valid_path(map))
-	// 		(merr("The isn't a valid path for the player to finish the game."),
-	// 			valid = 0);
+	if (valid)
+		if (!is_path_valid(map))
+			(merr("There isn't a valid path for the player to finish the game."),
+				valid = 0);
 	return (valid);
 }
