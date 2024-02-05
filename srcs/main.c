@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 18:56:55 by cviegas           #+#    #+#             */
-/*   Updated: 2024/02/05 11:28:05 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/02/05 11:39:33 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	main(int ac, char **av)
 	if (ac != 2)
 		return (perr("Usage: ./so_long mapfile.ber"), FAIL);
 	init_game(&g);
-	// handle_map(av[1], &g);
+	handle_map(av[1], &g);
 	g.mlx = mlx_init();
 	init_window(&g);
 	events(&g);
