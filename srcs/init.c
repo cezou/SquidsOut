@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 17:37:24 by cviegas           #+#    #+#             */
-/*   Updated: 2024/02/05 12:08:20 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/02/06 11:42:05 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,7 @@ void	init_window(t_game *g)
 {
 	g->spr->bg = init_img(g, "textures/bg.xpm");
 	g->mlx_win = mlx_new_window(g->mlx, W_WIDTH, W_HEIGHT, "Squids Out");
+	if (!g->mlx_win)
+		clean_and_exit_game(g, FAIL);
 	mlx_put_image_to_window(g->mlx, g->mlx_win, g->spr->bg.img, 0, 0);
 }

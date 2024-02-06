@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 17:38:25 by cviegas           #+#    #+#             */
-/*   Updated: 2024/02/05 17:16:30 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/02/06 11:29:50 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ static bool	isnt_ber_ended(const char *s)
 void	handle_map(const char *file, t_game *g)
 {
 	if (isnt_ber_ended(file))
-		return (merr("File is not a .ber"), exit(FAIL));
-	g->map.block = create_map(file);
+		return (merr("File is not a .ber"), free_game(g), exit(FAIL));
+	g->map.block = create_map(file, g);
 	if (!g->map.block)
-		return (exit(FAIL));
+		return (free_game(g), exit(FAIL));
 	if (!is_map_valid(g->map.block))
 		return (free_game(g), exit(FAIL));
 }

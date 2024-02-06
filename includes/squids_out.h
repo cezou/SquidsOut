@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 18:58:17 by cviegas           #+#    #+#             */
-/*   Updated: 2024/02/05 19:11:51 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/02/06 11:55:37 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,11 +72,14 @@ int				key_events(int keysym, t_game *g);
 /* Map Handling */
 
 void			handle_map(const char *file, t_game *g);
-char			**create_map(const char *filename);
+char			**create_map(const char *filename, t_game *g);
 bool			is_map_valid(char **map);
 bool			is_there_unvalid_chars(char **map);
 void			it_contains_everything(char **map, bool *valid);
 bool			is_path_valid(char **map);
+bool			**turn_map_into_bool(char **map);
+void			reset_bool_map(bool **bool_map, char **map);
+size_t			*player_starting_position(char **map);
 
 typedef struct s_map_data
 {

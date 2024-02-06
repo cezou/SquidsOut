@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 16:21:19 by cviegas           #+#    #+#             */
-/*   Updated: 2024/02/05 18:11:38 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/02/06 11:42:58 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,8 @@ bool	is_map_valid(char **map)
 	if (!is_rectangle(map))
 		(merr("It isn't a rectangle"), valid = 0);
 	if (is_there_unvalid_chars(map))
-		(merr("There is at least one unvalid char:"),
-			perr("     ● the only ones valid are '01CEP'"), valid = 0);
+		(merr("There is at least one unvalid char:                       "),
+			perr("     - the only ones valid are '01CEP'"), valid = 0);
 	if (!map[1] || !map[2] || !map[0][1] || !map[0][2])
 		(merr("It is too small, it can't be surrounded by walls"),
 			perr("     and contain '1 exit, at least 1 collectible,"),
@@ -79,7 +79,7 @@ bool	is_map_valid(char **map)
 	}
 	if (valid)
 		if (!is_path_valid(map))
-			(merr("There isn't a valid path for the player to finish the game."),
+			(merr("There isn't a valid path for the player to finish the game"),
 				valid = 0);
 	return (valid);
 }

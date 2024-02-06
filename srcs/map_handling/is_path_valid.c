@@ -6,69 +6,31 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 15:08:33 by cviegas           #+#    #+#             */
-/*   Updated: 2024/02/05 20:41:57 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/02/06 12:26:14 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/squids_out.h"
 
-bool	**turn_map_into_bool(char **map)
+static bool	init_map_data(char **map, t_map_data *m)
 {
-	bool	**wall_or_not;
-	size_t	i;
-	size_t	j;
+	size_t	*player_pos;
 
-	wall_or_not = malloc(sizeof(bool *) * (a_len(map) + 1));
-	if (!wall_or_not)
-		return (merr("Malloc failed"), NULL);
-	i = 0;
-	while (map[i])
-	{
-		wall_or_not[i] = malloc(sizeof(bool) * ft_strlen(map[i]));
-		if (!wall_or_not[i])
-			return (merr("Malloc failed"), protected_a_free((void **)map), NU);
-		j = 0;
-		while (map[i][j])
-		{
-			wall_or_not[i][j] = 0;
-			if (map[i][j] == '1')
-				wall_or_not[i][j] = 1;
-			j++;
-		}
-		i++;
-	}
-	wall_or_not[i] = NULL;
-	return (wall_or_not);
-}
-size_t	*player_starting_position(char **map)
-{
-	size_t	i;
-	size_t	j;
-	size_t	*player_coords;
-
-	i = 0;
-	while (map[i])
-	{
-		j = 0;
-		while (map[i][j])
-		{
-			if (map[i][j] == 'P')
-			{
-				player_coords = malloc(sizeof(size_t) * 2);
-				if (!player_coords)
-					return (merr("Malloc failed"), NULL);
-				player_coords[0] = i;
-				player_coords[1] = j;
-				return (player_coords);
-			}
-			j++;
-		}
-		i++;
-	}
-	return (NULL);
+	m->char_map = map;
+	m->map = turn_map_into_bool(map);
+	if (!m->map)
+		return (0);
+	player_pos = player_starting_position(map);
+	if (!player_pos)
+		return (protected_a_free((void **)m->map), 0);
+	m->x = player_pos[0];
+	m->y = player_pos[1];
+	protected_free(player_pos);
+	m->found_it = 0;
+	return (1);
 }
 
-void	search_for_something(t_map_data *m, int x, int y, char to_find)
+static void	search_for_something(t_map_data *m, int x, int y, char to_find)
 {
 	if (m->char_map[x][y] == to_find || m->found_it)
 	{
@@ -89,22 +51,32 @@ void	search_for_something(t_map_data *m, int x, int y, char to_find)
 		search_for_something(m, x, --y, to_find);
 }
 
-bool	init_map_data(char **map, t_map_data *m)
+static void	search_for_every_squids(t_map_data *m)
 {
-	size_t	*player_pos;
+	size_t	i;
+	size_t	j;
 
-	m->char_map = map;
-	m->map = turn_map_into_bool(map);
-	if (!m->map)
-		return (0);
-	player_pos = player_starting_position(map);
-	if (!player_pos)
-		return (protected_a_free((void **)m->map), 0);
-	m->x = player_pos[0];
-	m->y = player_pos[1];
-	protected_free(player_pos);
-	m->found_it = 0;
-	return (1);
+	i = 0;
+	while (m->char_map[i])
+	{
+		j = 0;
+		while (m->char_map[i][j])
+		{
+			if (m->char_map[i][j] == 'C')
+			{
+				m->found_it = 0;
+				reset_bool_map(m->map, m->char_map);
+				ft_printf("Ligne %d :\n", i);
+				print_bool_a(m->map, m->char_map);
+				search_for_something(m, i, j, 'P');
+				if (!m->found_it)
+					return ;
+			}
+			j++;
+		}
+		i++;
+	}
+	m->found_it = 1;
 }
 
 bool	is_path_valid(char **map)
@@ -113,15 +85,41 @@ bool	is_path_valid(char **map)
 
 	if (!init_map_data(map, &map_data))
 		return (0);
+	print_s(map);
+	print_bool_a(map_data.map, map);
 	search_for_something(&map_data, map_data.x, map_data.y, 'E');
+	reset_bool_map(map_data.map, map_data.char_map);
+	print_bool_a(map_data.map, map);
 	if (!map_data.found_it)
 		merr("Player can't find the exit");
+	search_for_every_squids(&map_data);
+	if (!map_data.found_it)
+		merr("Player can't find at least one squid");
 	print_bool_a(map_data.map, map);
-	ft_printf("\n");
-	print_s(map);
 	protected_a_free((void **)map_data.map);
 	return (map_data.found_it);
 }
+
+// static void	search_for_something(t_map_data *m, int x, int y, char to_find)
+// {
+// 	if (m->char_map[x][y] == to_find || m->found_it)
+// 	{
+// 		m->map[x][y] = 1;
+// 		m->found_it = 1;
+// 		return ;
+// 	}
+// 	if (m->map[x][y])
+// 		return ;
+// 	m->map[x][y] = 1;
+// 	if (!m->map[x + 1][y] && m->char_map[x + 1][y])
+// 		search_for_something(m, ++x, y, to_find);
+// 	if (!m->map[x - 1][y] && (x - 1 > 0))
+// 		search_for_something(m, --x, y, to_find);
+// 	if (!m->map[x][y + 1] && m->char_map[x][y + 1])
+// 		search_for_something(m, x, ++y, to_find);
+// 	if (!m->map[x][y - 1] && (y - 1 > 0))
+// 		search_for_something(m, x, --y, to_find);
+// }
 
 // void	search_for_exit(t_map_data *m, int x, int y)
 // {

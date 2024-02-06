@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 18:56:55 by cviegas           #+#    #+#             */
-/*   Updated: 2024/02/05 11:38:59 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/02/06 11:40:52 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ int	main(int ac, char **av)
 	init_game(&g);
 	handle_map(av[1], &g);
 	g.mlx = mlx_init();
+	if (!g.mlx)
+		return (perr("Mlx init failed"), free_game(&g), FAIL);
 	init_window(&g);
 	events(&g);
 	mlx_loop(g.mlx);

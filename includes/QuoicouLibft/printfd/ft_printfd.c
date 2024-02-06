@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 17:16:18 by cviegas           #+#    #+#             */
-/*   Updated: 2024/02/02 18:28:22 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/02/06 11:10:17 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,5 +86,5 @@ void	v_printfd(int fd, const char *s, ...)
 /* Prints a bold red string ended with a return on the standard error */
 void	perr(const char *s)
 {
-	ft_printfd(STDERR_FILENO, "%s%s%s%s\n", BOLD, RED, s, RESET);
+	ft_printfd(STDERR_FILENO, "%s%s%s\n", RED, s, RESET);
 }
