@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 13:33:53 by cviegas           #+#    #+#             */
-/*   Updated: 2023/12/04 17:30:16 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/02/06 20:21:35 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,23 @@ char	*get_next_line_aux(int fd, char *buff, char *line, t_list *stash)
 	int	red;
 
 	red = read(fd, buff, BUFFER_SIZE);
+	if (red == -1)
+		return (free(line), ft_lstclear(&stash, free), NULL);
 	buff[red] = 0;
 	while (red && !return_in_buff(buff))
 	{
 		ft_lstadd_back(&stash, ft_lstnew(buff_to_char(buff)));
 		red = read(fd, buff, BUFFER_SIZE);
+		if (red == -1)
+			return (free(line), ft_lstclear(&stash, free), NULL);
 		buff[red] = 0;
 	}
 	if (stash || return_in_buff(buff))
 	{
 		ft_lstadd_back(&stash, ft_lstnew(buff_to_char(buff)));
 		line = stash_to_line(stash);
+		if (!line)
+			return (ft_lstclear(&stash, free), NULL);
 		ft_strlcpy(buff, buff + return_in_buff(buff), BUFFER_SIZE + 1);
 		ft_lstclear(&stash, free);
 		return (line);
@@ -48,11 +54,18 @@ char	*get_next_line(int fd)
 	if (return_in_buff(buff))
 	{
 		line = buff_to_char(buff);
+		if (!line)
+			return (NULL);
 		ft_strlcpy(buff, buff + return_in_buff(buff), BUFFER_SIZE + 1);
 		return (line);
 	}
 	if (buff[0])
-		ft_lstadd_back(&stash, ft_lstnew(buff_to_char(buff)));
+	{
+		line = buff_to_char(buff);
+		if (!line)
+			return (NULL);
+		ft_lstadd_back(&stash, ft_lstnew(line));
+	}
 	return (get_next_line_aux(fd, buff, line, stash));
 }
 
@@ -69,7 +82,7 @@ char	*buff_to_char(char buff[])
 		size++;
 	string_to_lst = malloc(sizeof(char) * (size + 2));
 	if (!string_to_lst)
-		return (NULL);
+		return (free(buff), NULL);
 	i = 0;
 	while (i <= size && buff[i])
 	{

@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 23:22:55 by cviegas           #+#    #+#             */
-/*   Updated: 2023/12/04 16:36:10 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/02/06 19:45:08 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ t_list	*ft_lstnew(void *content)
 {
 	t_list	*lst;
 
+	if (!content)
+		return (NULL);
 	lst = malloc(sizeof(t_list));
 	if (!lst)
 		return (NULL);

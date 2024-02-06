@@ -3,7 +3,7 @@ NAME = gnl.a
 
 # COMPILATION
 CC = cc 
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror -g
 
 # FILES
 SRC = get_next_line.c \
@@ -25,7 +25,7 @@ libft.a:
 	@cp ../libft/libft.a $(NAME)
 
 ccc:
-	@cc -Wall -Wextra -Werror -c get_next_line.c -I .
+	@cc -Wall -Wextra -Werror -g -c get_next_line.c -I .
 
 echo:
 	@echo "$(UP)$(ERASE)         \033[32m Greenlight gnl!\033[0m"

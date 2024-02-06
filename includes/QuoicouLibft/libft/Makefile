@@ -3,7 +3,7 @@ NAME		= libft.a
 
 # COMPILATION
 CC			= cc
-CFLAGS		= -Wall -Wextra -Werror
+CFLAGS		= -Wall -Wextra -Werror -g
 
 # FILES
 SRCS		=	ft_striteri.c ft_strmapi.c ft_putnbr_fd.c ft_putchar_fd.c \
@@ -23,7 +23,7 @@ BONUS_OBJS	= $(BONUS_SRCS:.c=.o)
 all: $(NAME) bonus clean
 
 .o: .c
-	@$(CC) $(CFLAGS) -o $(SRCS) $(OBJS) -I .
+	@$(CC) $(CFLAGS) -o -g $(SRCS) $(OBJS) -I .
 
 $(NAME): $(OBJS)
 	@ar rc $@ $^

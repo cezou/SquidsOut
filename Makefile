@@ -3,7 +3,7 @@ NAME = so_long
 
 # COMPILATION
 CC = cc 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g
 MLXFLAGS = -I/usr/include -Imlx_linux -O3 -lXext -lX11 -lm
 
 # DIRECTORIES

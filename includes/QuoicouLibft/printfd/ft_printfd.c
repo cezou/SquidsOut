@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 17:16:18 by cviegas           #+#    #+#             */
-/*   Updated: 2024/02/06 11:10:17 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/02/06 19:32:11 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	ft_printfd(int fd, const char *s, ...)
 	int		i;
 	int		nb_printed;
 
-	if (!s)
+	if (!s || fd < 0)
 		return (-1);
 	va_start(ap, s);
 	nb_printed = 0;
@@ -68,7 +68,7 @@ void	v_printfd(int fd, const char *s, ...)
 	va_list	ap;
 	int		i;
 
-	if (!s)
+	if (!s || fd < 0)
 		return ;
 	va_start(ap, s);
 	i = 0;

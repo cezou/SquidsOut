@@ -3,7 +3,7 @@ NAME		= libftprintf.a
 
 # COMPILATION
 CC			= cc
-CFLAGS		= -Wall -Wextra -Werror
+CFLAGS		= -Wall -Wextra -Werror -g
 
 # FILES
 SRCS		= ft_printfd.c ft_printf.c ft_putunsigned.c ft_putaddr.c ft_puthexa.c
