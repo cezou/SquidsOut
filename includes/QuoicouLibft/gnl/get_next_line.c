@@ -6,11 +6,20 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 13:33:53 by cviegas           #+#    #+#             */
-/*   Updated: 2024/02/06 20:21:35 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/02/08 15:00:00 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+static void	protected_free(void *p)
+{
+	if (p)
+	{
+		free(p);
+		p = NULL;
+	}
+}
 
 char	*get_next_line_aux(int fd, char *buff, char *line, t_list *stash)
 {
@@ -18,7 +27,7 @@ char	*get_next_line_aux(int fd, char *buff, char *line, t_list *stash)
 
 	red = read(fd, buff, BUFFER_SIZE);
 	if (red == -1)
-		return (free(line), ft_lstclear(&stash, free), NULL);
+		return (protected_free(line), ft_lstclear(&stash, free), NULL);
 	buff[red] = 0;
 	while (red && !return_in_buff(buff))
 	{

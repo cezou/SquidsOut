@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 18:58:17 by cviegas           #+#    #+#             */
-/*   Updated: 2024/02/06 11:55:37 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/02/09 20:47:06 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include "math.h"
 # include "minilibx-linux/mlx.h"
 # include "stdbool.h"
+# include "vec2.h"
 # include <X11/X.h>
 # include <X11/keysym.h>
 # include <stdio.h>
@@ -24,6 +25,9 @@
 # include <unistd.h>
 # define W_WIDTH 1920
 # define W_HEIGHT 1080
+# define W_LIMIT 200
+# define H_LIMIT 100
+# define S_SIZE 32
 # define NU NULL
 # define STDERR STDERR_FILENO
 # define FAIL EXIT_FAILURE
@@ -39,12 +43,21 @@ typedef struct s_img
 typedef struct s_sprites
 {
 	t_img		bg;
+	t_img		block;
+	t_img		player;
+	t_img		*squids;
+	t_img		cage;
 }				t_sprites;
+
+typedef struct s_player
+{
+	t_v2f		pos;
+}				t_player;
 
 typedef struct s_map
 {
 	char		**block;
-	float		**pos;
+	t_player	p;
 }				t_map;
 
 typedef struct s_game
