@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 18:58:17 by cviegas           #+#    #+#             */
-/*   Updated: 2024/02/09 20:47:06 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/02/12 19:41:33 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,10 @@ int				exit_game(t_game *g);
 
 void			events(t_game *g);
 int				key_events(int keysym, t_game *g);
+
+/* On User Update */
+
+int				update(t_game *g);
 
 /* Map Handling */
 

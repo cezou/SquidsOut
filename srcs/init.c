@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 17:37:24 by cviegas           #+#    #+#             */
-/*   Updated: 2024/02/06 11:42:05 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/02/12 19:26:12 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	init_game(t_game *g)
 		return (exit(FAIL));
 	g->spr->bg.img = NULL;
 	g->map.block = NU;
-	g->map.pos = NU;
+	g->map.p.pos = (t_v2i){0, 0};
 	g->mlx_win = NU;
 	g->mlx = NU;
 }
