@@ -8,6 +8,10 @@ MLXFLAGS = -I/usr/include -Imlx_linux -O3 -lXext -lX11 -lm
 
 # DIRECTORIES
 S_DIR = srcs
+E_DIR = $(S_DIR)/2d_engine
+D_DIR = $(E_DIR)/draw
+U_DIR = $(S_DIR)/utils
+MH_DIR = $(S_DIR)/map_handling
 M_DIR = maps
 T_DIR = textures
 O_DIR = objs
@@ -16,7 +20,7 @@ L_DIR = $(I_DIR)/QuoicouLibft
 MLX_DIR = $(I_DIR)/minilibx-linux
 
 # FILES
-SRCS = $(S_DIR)/*.c $(S_DIR)/map_handling/*.c $(S_DIR)/utils/*.c $(S_DIR)/2d_engine/*.c
+SRCS = $(S_DIR)/*.c $(MH_DIR)/*.c $(U_DIR)/*.c $(E_DIR)/*.c $(D_DIR)/*.c
 LIBFT = $(L_DIR)/libft.a
 MLX = $(MLX_DIR)/libmlx.a
 INCS = $(LIBFT) $(MLX)

@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 18:49:00 by cviegas           #+#    #+#             */
-/*   Updated: 2024/02/16 17:53:55 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/02/16 20:09:38 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	update_game_data(t_game *g)
 
 void	draw_screen(t_game *g)
 {
-	(void)g;
+	draw_map(g);
 }
 
 int	update(t_game *g)

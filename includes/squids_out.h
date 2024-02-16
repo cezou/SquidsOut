@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 18:58:17 by cviegas           #+#    #+#             */
-/*   Updated: 2024/02/16 18:02:12 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/02/16 20:12:03 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,8 @@ int				clean_and_exit_game(t_game *g, bool fail);
 void			free_game(t_game *g);
 int				exit_game(t_game *g);
 
+/* Check and Init Map */
+
 typedef struct s_map_data
 {
 	bool		**map;
@@ -136,10 +138,54 @@ int				key_events(int keysym, t_game *g);
 char			get_tile(size_t x, size_t y, t_game g);
 void			set_tile(size_t x, size_t y, char c, t_game *g);
 
+/* Drawing */
+
+t_img			init_img(t_game *g, const char *path);
+void			put_img(void *img, int x, int y, t_game *g);
+int				rgb(unsigned char r, unsigned char g, unsigned char b);
+void			put_color(int color, int x, int y, t_game *g);
+bool			draw_tile(char c, size_t x, size_t y, t_game *g);
+void			draw_map(t_game *g);
+
+// /* int Color codes */
+# define BLACK 0x000000
+# define WHITE 0xFFFFFF
+// # define RED 0xFF0000
+# define GREEN 0x00FF00
+// # define BLUE 0x0000FF
+// # define YELLOW 0xFFFF00
+// # define CYAN 0x00FFFF
+// # define MAGENTA 0xFF00FF
+# define ORANGE 0xFFA500
+// # define PURPLE 0x800080
+// # define PINK 0xFFC0CB
+// # define BROWN 0xA52A2A
+// # define GREY 0x808080
+// # define LIGHT_GREY 0xD3D3D3
+// # define DARK_GREY 0xA9A9A9
+// # define LIGHT_BLUE 0xADD8E6
+// # define LIGHT_GREEN 0x90EE90
+// # define LIGHT_YELLOW 0xFFFFE0
+// # define LIGHT_CYAN 0xE0FFFF
+// # define LIGHT_MAGENTA 0xFFB6C1
+// # define LIGHT_ORANGE 0xFFD700
+// # define LIGHT_PURPLE 0x9370DB
+// # define LIGHT_PINK 0xFFB6C1
+// # define LIGHT_BROWN 0xCD853F
+# define DARK_BLUE 0x00008B
+// # define DARK_GREEN 0x006400
+// # define DARK_YELLOW 0x808000
+// # define DARK_CYAN 0x008080
+// # define DARK_MAGENTA 0x8B008B
+// # define DARK_ORANGE 0xFF8C00
+// # define DARK_PURPLE 0x800080
+// # define DARK_PINK 0xFF1493
+// # define DARK_BROWN 0x8B4513
+
 /* Define colors for printf in strings */
 # define BOLD "\033[1m"
 # define RED "\033[31m"
-# define GREEN "\033[32m"
+# define P_GREEN "\033[32m"
 # define RESET "\033[0m"
 
 // enum

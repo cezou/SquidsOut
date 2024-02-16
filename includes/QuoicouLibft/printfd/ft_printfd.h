@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 15:33:49 by cviegas           #+#    #+#             */
-/*   Updated: 2024/02/03 17:14:53 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/02/16 20:12:30 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 /* Colors */
 # define BOLD "\033[1m"
 # define RED "\033[31m"
-# define GREEN "\033[32m"
 # define RESET "\033[0m"
 
 int		ft_printf(const char *s, ...);
