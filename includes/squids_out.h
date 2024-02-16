@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 18:58:17 by cviegas           #+#    #+#             */
-/*   Updated: 2024/02/12 19:41:33 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/02/16 18:02:12 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,16 +49,29 @@ typedef struct s_sprites
 	t_img		cage;
 }				t_sprites;
 
-typedef struct s_player
-{
-	t_v2f		pos;
-}				t_player;
+// typedef struct s_player
+// {
+// 	t_v2f		pos;
+// }				t_player;
 
 typedef struct s_map
 {
 	char		**block;
-	t_player	p;
+	size_t		width;
+	size_t		height;
+	size_t		x_p_pos;
+	size_t		y_p_pos;
 }				t_map;
+
+typedef struct s_draw
+{
+	size_t		x_visible_tiles;
+	size_t		y_visible_tiles;
+	float		x_cam_pos;
+	float		y_cam_pos;
+	float		x_offset;
+	float		y_offset;
+}				t_draw;
 
 typedef struct s_game
 {
@@ -66,27 +79,27 @@ typedef struct s_game
 	void		*mlx_win;
 	t_sprites	*spr;
 	t_map		map;
+	t_draw		draw;
 }				t_game;
 
 /* FUNCTIONS */
-/* 	Game Handling */
+/* 	Game & Mlx Handling */
 
 void			init_game(t_game *g);
+void			init_data(t_game *g);
 void			init_window(t_game *g);
 int				clean_and_exit_game(t_game *g, bool fail);
 void			free_game(t_game *g);
 int				exit_game(t_game *g);
 
-/* 	Events */
-
-void			events(t_game *g);
-int				key_events(int keysym, t_game *g);
-
-/* On User Update */
-
-int				update(t_game *g);
-
-/* Map Handling */
+typedef struct s_map_data
+{
+	bool		**map;
+	char		**char_map;
+	size_t		x;
+	size_t		y;
+	bool		found_it;
+}				t_map_data;
 
 void			handle_map(const char *file, t_game *g);
 char			**create_map(const char *filename, t_game *g);
@@ -98,15 +111,6 @@ bool			**turn_map_into_bool(char **map);
 void			reset_bool_map(bool **bool_map, char **map);
 size_t			*player_starting_position(char **map);
 
-typedef struct s_map_data
-{
-	bool		**map;
-	char		**char_map;
-	size_t		x;
-	size_t		y;
-	bool		found_it;
-}				t_map_data;
-
 /* Utils */
 
 void			merr(const char *s);
@@ -114,6 +118,23 @@ void			protected_free(void *p);
 void			protected_a_free(void **p);
 void			print_bool_a(bool **map, char **chars);
 size_t			a_len(char **array);
+
+/* [Cezou|cviegas]'s 2D Platformer Engine */
+
+/* Update */
+
+int				update(t_game *g);
+void			update_camera(t_game *g);
+
+/* 	Events */
+
+void			events(t_game *g);
+int				key_events(int keysym, t_game *g);
+
+/* Map Handling */
+
+char			get_tile(size_t x, size_t y, t_game g);
+void			set_tile(size_t x, size_t y, char c, t_game *g);
 
 /* Define colors for printf in strings */
 # define BOLD "\033[1m"

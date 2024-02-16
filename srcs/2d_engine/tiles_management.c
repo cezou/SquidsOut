@@ -1,32 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   tiles_management.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/29 18:56:55 by cviegas           #+#    #+#             */
-/*   Updated: 2024/02/16 18:02:26 by cviegas          ###   ########.fr       */
+/*   Created: 2024/02/16 12:17:13 by cviegas           #+#    #+#             */
+/*   Updated: 2024/02/16 14:42:20 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/squids_out.h"
+#include "../../includes/squids_out.h"
 
-int	main(int ac, char **av)
+char	get_tile(size_t x, size_t y, t_game g)
 {
-	t_game	g;
+	if (x > 0 && x < g.map.width && y > 0 && y < g.map.height)
+		return (g.map.block[x][y]);
+	return (0);
+}
 
-	if (ac != 2)
-		return (perr("Usage: ./so_long mapfile.ber"), FAIL);
-	init_game(&g);
-	handle_map(av[1], &g);
-	init_data(&g);
-	g.mlx = mlx_init();
-	if (!g.mlx)
-		return (perr("Mlx init failed"), free_game(&g), FAIL);
-	init_window(&g);
-	events(&g);
-	mlx_loop(g.mlx);
-	free_game(&g);
-	(void)av;
+void	set_tile(size_t x, size_t y, char c, t_game *g)
+{
+	if (x > 0 && x < g->map.width && y > 0 && y < g->map.height)
+		g->map.block[x][y] = c;
+	else
+		merr("These tiles coordinates are out of boundaries");
 }

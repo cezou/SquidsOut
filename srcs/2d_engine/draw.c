@@ -1,32 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/29 18:56:55 by cviegas           #+#    #+#             */
-/*   Updated: 2024/02/16 18:02:26 by cviegas          ###   ########.fr       */
+/*   Created: 2024/02/16 12:36:03 by cviegas           #+#    #+#             */
+/*   Updated: 2024/02/16 17:55:17 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/squids_out.h"
+#include "../../includes/squids_out.h"
 
-int	main(int ac, char **av)
+void	draw_map(t_game g)
 {
-	t_game	g;
+	char	tile;
+	size_t	x;
+	size_t	y;
 
-	if (ac != 2)
-		return (perr("Usage: ./so_long mapfile.ber"), FAIL);
-	init_game(&g);
-	handle_map(av[1], &g);
-	init_data(&g);
-	g.mlx = mlx_init();
-	if (!g.mlx)
-		return (perr("Mlx init failed"), free_game(&g), FAIL);
-	init_window(&g);
-	events(&g);
-	mlx_loop(g.mlx);
-	free_game(&g);
-	(void)av;
+	x = 0;
+	while (g.map.block[x])
+	{
+		y = 0;
+		while (g.map.block[x][y])
+		{
+			tile = get_tile(x, y, g);
+			// draw_tile(char c, size_t x, size_t y)
+			y++;
+		}
+		x++;
+	}
 }

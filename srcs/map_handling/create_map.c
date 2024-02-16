@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 16:15:28 by cviegas           #+#    #+#             */
-/*   Updated: 2024/02/09 20:43:25 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/02/16 12:36:17 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,15 @@ static size_t	count_lines(const char *filename, t_game *g)
 		line = get_next_line(fd);
 		if (!line)
 			break ;
+		if (g->map.width == 0)
+			g->map.width = ft_strlen(line);
 		free(line);
 		count++;
 	}
 	close(fd);
 	if (!count)
 		return (merr("File empty"), free_game(g), exit(FAIL), 0);
+	g->map.height = count;
 	return (count);
 }
 
