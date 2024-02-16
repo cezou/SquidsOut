@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 12:36:03 by cviegas           #+#    #+#             */
-/*   Updated: 2024/02/16 18:06:17 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/02/16 18:08:44 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ static void	update_cam_data(t_game *g)
 	g->draw.y_offset = g->draw.y_cam_pos - (float)g->draw.y_visible_tiles / 2;
 }
 
-// Stick the camera to the player and offset if the player is over the boundaries of the map.
+// Stick the camera to the player and offset if the player is over
+// the boundaries of the map.
 void	update_camera(t_game *g)
 {
 	update_cam_data(g);
