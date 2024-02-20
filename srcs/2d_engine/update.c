@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 18:49:00 by cviegas           #+#    #+#             */
-/*   Updated: 2024/02/16 20:09:38 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/02/20 11:02:15 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,10 @@ void	draw_screen(t_game *g)
 
 int	update(t_game *g)
 {
+	// ft_printfd(2, "WIDTH = %d, HEIGHT = %d\n", g->map.width, g->map.height);
 	update_game_data(g);
 	draw_screen(g);
+	put_color(WHITE, 0, 0, g);
+	draw_player(g);
 	return (0);
 }

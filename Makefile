@@ -51,7 +51,10 @@ launch:
 	@./$(NAME) $1
 
 $(MLX):
-	@make --silent -C $(MLX_DIR)
+	@if [ -f $(MLX) ]; then \
+	git clone https://github.com/42Paris/minilibx-linux.git $(MLX_DIR); \
+	make --silent -C $(MLX_DIR); \
+	fi
 
 $(LIBFT):
 	@make --silent -C $(L_DIR)
@@ -65,6 +68,9 @@ clean:
 			rm -f $(NAME); \
 			echo "$(BOLD)$(PINK)  ● Adios Squidos 🦑$(RESET)"; \
 	fi
+
+fullclean: fclean
+	@rm -rf $(MLX_DIR)
 
 fclean:
 	@make --silent fclean -C $(L_DIR)

@@ -6,11 +6,11 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 20:20:26 by cviegas           #+#    #+#             */
-/*   Updated: 2024/02/09 20:42:24 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/02/18 19:44:56 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// I stole this structures from @alde-fre:
+// I stole these structures from @alde-fre:
 // https://profile.intra.42.fr/users/alde-fre
 // https://github.com/ForAbby-X
 // Go check his work, he did the best so_long and the best cube3d of the world.
