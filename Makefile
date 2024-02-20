@@ -51,10 +51,10 @@ launch:
 	@./$(NAME) $1
 
 $(MLX):
-	@if [ -f $(MLX) ]; then \
-	git clone https://github.com/42Paris/minilibx-linux.git $(MLX_DIR); \
-	make --silent -C $(MLX_DIR); \
+	@if [ ! -d $(MLX_DIR) ]; then \
+	git clone https://github.com/42Paris/minilibx-linux.git $(MLX_DIR)  > /dev/null 2>&1; \
 	fi
+	@make --silent -C $(MLX_DIR);
 
 $(LIBFT):
 	@make --silent -C $(L_DIR)
