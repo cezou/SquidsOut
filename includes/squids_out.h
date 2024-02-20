@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 18:58:17 by cviegas           #+#    #+#             */
-/*   Updated: 2024/02/20 10:52:44 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/02/20 18:50:47 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ typedef struct s_map
 
 typedef struct s_draw
 {
+	t_sprites	*spr;
 	size_t		x_visible_tiles;
 	size_t		y_visible_tiles;
 	float		x_cam_pos;
@@ -78,7 +79,6 @@ typedef struct s_game
 {
 	void		*mlx;
 	void		*mlx_win;
-	t_sprites	*spr;
 	t_map		map;
 	t_draw		draw;
 }				t_game;
@@ -119,6 +119,8 @@ size_t			*player_starting_position(char **map);
 void			merr(const char *s);
 void			protected_free(void *p);
 void			protected_a_free(void **p);
+void			free_img(t_img *img, void *mlx);
+void			free_a_img(t_img **img, void *mlx);
 void			print_bool_a(bool **map, char **chars);
 size_t			a_len(char **array);
 
@@ -144,7 +146,7 @@ void			set_tile(size_t x, size_t y, char c, t_game *g);
 t_img			init_xpm(const char *path, t_game *g);
 void			put_img(void *img, int x, int y, t_game *g);
 int				rgb(unsigned char r, unsigned char g, unsigned char b);
-void			put_color(int color, int x, int y, t_game *g);
+void			put_square(int color, int x, int y, t_game *g);
 bool			draw_tile(char c, size_t x, size_t y, t_game *g);
 void			draw_map(t_game *g);
 void			draw_player(t_game *g);

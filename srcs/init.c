@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 17:37:24 by cviegas           #+#    #+#             */
-/*   Updated: 2024/02/20 10:46:12 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/02/20 19:01:37 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,13 @@ void	init_data(t_game *g)
 
 void	init_game(t_game *g)
 {
-	g->spr = malloc(sizeof(t_sprites));
-	if (!g->spr)
+	g->draw.spr = malloc(sizeof(t_sprites));
+	if (!g->draw.spr)
 		return (exit(FAIL));
-	g->spr->bg.img = NULL;
+	g->draw.spr->player.img = NU;
+	g->draw.spr->bg.img = NU;
+	g->draw.spr->cage.img = NU;
+	g->draw.spr->squids = NU;
 	g->map.block = NU;
 	g->map.width = 0;
 	g->mlx_win = NU;
@@ -60,7 +63,7 @@ void	init_game(t_game *g)
 
 void	init_window(t_game *g)
 {
-	g->spr->bg = init_xpm("bg", g);
+	g->draw.spr->player = init_xpm("squido", g);
 	g->mlx_win = mlx_new_window(g->mlx, W_WIDTH, W_HEIGHT,
 			"Squids Out (pre-alpha)");
 	if (!g->mlx_win)

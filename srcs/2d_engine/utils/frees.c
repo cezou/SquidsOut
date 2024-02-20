@@ -6,11 +6,11 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 10:52:14 by cviegas           #+#    #+#             */
-/*   Updated: 2024/02/05 17:26:32 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/02/20 18:53:32 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/squids_out.h"
+#include "../../../includes/squids_out.h"
 
 /* Frees only if the adress exists and becomes a NULL pointer */
 void	protected_free(void *p)
@@ -41,4 +41,20 @@ void	protected_a_free(void **p)
 		a_free(p);
 		p = NULL;
 	}
+}
+
+void	free_img(t_img *img, void *mlx)
+{
+	if (img->img)
+		mlx_destroy_image(mlx, img->img);
+	protected_free(img);
+}
+
+void	free_a_img(t_img **img, void *mlx)
+{
+	size_t	i;
+
+	i = 0;
+	while (img[i])
+		free_img(img[i++], mlx);
 }
