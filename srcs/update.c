@@ -1,29 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   events.c                                           :+:      :+:    :+:   */
+/*   update.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/30 17:41:46 by cviegas           #+#    #+#             */
-/*   Updated: 2024/02/21 15:31:45 by cviegas          ###   ########.fr       */
+/*   Created: 2024/02/12 18:49:00 by cviegas           #+#    #+#             */
+/*   Updated: 2024/02/22 11:37:04 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/squids_out.h"
 
-int	key_events(int keysym, t_game *g)
+void	update_game_data(t_game *g)
 {
-	if (keysym == XK_Escape)
-		clean_and_exit_game(g, SUCCESS);
+	update_camera(g);
+}
+
+void	draw_screen(t_game *g)
+{
+	draw_map(g);
+}
+
+int	update(t_game *g)
+{
+	update_game_data(g);
+	draw_screen(g);
+	put_square(WHITE, 0, 0, g);
+	draw_player(g);
 	return (0);
 }
-
-void	events(t_game *g)
-{
-	mlx_loop_hook(g->mlx, update, g);
-	mlx_hook(g->mlx_win, KeyPress, KeyPressMask, key_events, g);
-	mlx_hook(g->mlx_win, DestroyNotify, StructureNotifyMask, exit_game, g);
-}
-
-// mlx_hook(m->mlx_win, ButtonPress, ButtonPressMask, mouse_hook, m);

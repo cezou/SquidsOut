@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 17:38:25 by cviegas           #+#    #+#             */
-/*   Updated: 2024/02/06 12:07:47 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/02/21 15:36:34 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ bool	**turn_map_into_bool(char **map)
 	{
 		wall_or_not[i] = malloc(sizeof(bool) * ft_strlen(map[i]));
 		if (!wall_or_not[i])
-			return (merr("Malloc failed"), protected_a_free((void **)map), NU);
+			return (merr("Malloc failed"), pa_free((void **)map), NU);
 		j = 0;
 		while (map[i][j])
 		{

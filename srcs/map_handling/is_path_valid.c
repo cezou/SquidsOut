@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 15:08:33 by cviegas           #+#    #+#             */
-/*   Updated: 2024/02/12 18:33:57 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/02/22 14:01:14 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ static bool	init_map_data(char **map, t_map_data *m, bool *valid)
 		return (0);
 	player_pos = player_starting_position(map);
 	if (!player_pos)
-		return (protected_a_free((void **)m->map), 0);
+		return (pa_free((void **)m->map), 0);
 	m->x = player_pos[0];
 	m->y = player_pos[1];
-	protected_free(player_pos);
+	p_free(player_pos);
 	m->found_it = 0;
 	return (1);
 }
@@ -77,13 +77,13 @@ bool	is_path_valid(char **map)
 
 	if (!init_map_data(map, &map_data, &valid))
 		return (0);
-	print_s(map);
+	ft_print_s((const char **)map);
 	search_for_something(&map_data, map_data.x, map_data.y, 'E');
 	if (!map_data.found_it)
 		(merr("Player can't find the exit"), valid = 0);
 	search_for_every_squids(&map_data);
 	if (!map_data.found_it)
 		(merr("Player can't find at least one squid"), valid = 0);
-	protected_a_free((void **)map_data.map);
+	pa_free((void **)map_data.map);
 	return (valid);
 }
