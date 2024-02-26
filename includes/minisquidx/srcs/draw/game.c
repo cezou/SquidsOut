@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 12:36:03 by cviegas           #+#    #+#             */
-/*   Updated: 2024/02/22 10:03:14 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/02/26 12:07:52 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,6 @@ void	draw_map(t_game *g)
 
 void	draw_player(t_game *g)
 {
-	put_img(g->draw.spr->player.img, g->map.x_p_pos - g->draw.x_offset,
+	put_img(g->draw.spr->player->img, g->map.x_p_pos - g->draw.x_offset,
 		g->map.y_p_pos - g->draw.y_offset, g);
 }

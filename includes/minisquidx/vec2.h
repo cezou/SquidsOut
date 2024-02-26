@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 20:20:26 by cviegas           #+#    #+#             */
-/*   Updated: 2024/02/22 13:53:47 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/02/26 11:32:28 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,6 @@
 typedef float t_v2f			__attribute__((vector_size(8)));
 typedef unsigned int t_v2u	__attribute__((vector_size(8)));
 typedef int t_v2i			__attribute__((vector_size(8)));
+typedef size_t t_v2s __attribute__((vector_size(8)));
 
 #endif

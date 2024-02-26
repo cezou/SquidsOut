@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 10:52:14 by cviegas           #+#    #+#             */
-/*   Updated: 2024/02/22 09:49:10 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/02/26 12:10:42 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void	free_img(t_img *img, void *mlx)
 	{
 		mlx_destroy_image(mlx, img->img);
 		img->img = NULL;
+		p_free(img);
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 09:41:46 by cviegas           #+#    #+#             */
-/*   Updated: 2024/02/22 13:57:32 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/02/26 12:04:40 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,78 +110,95 @@
 
 /* Structures */
 
+// Unsigned char is perfect for colors, since it's 0-255.
+typedef __uint8_t		t_hexa;
+typedef union u_color	t_color;
+
+union					u_color
+{
+	t_hexa				color;
+	struct
+	{
+		t_hexa			r;
+		t_hexa			g;
+		t_hexa			b;
+	};
+};
+
 typedef struct s_img
 {
-	void		*img;
-	int			width;
-	int			height;
-}				t_img;
+	void				*img;
+	t_color				*pixels;
+	size_t				width;
+	size_t				height;
+}						t_img;
 
 // Here you need to put your own images.
 typedef struct s_sprites
 {
-	t_img		bg;
-	t_img		block;
-	t_img		player;
-	t_img		*squids;
-	t_img		cage;
-}				t_sprites;
+	t_img				*bg;
+	t_img				*block;
+	t_img				*player;
+	t_img				**squids;
+	t_img				*cage;
+}						t_sprites;
 
 typedef struct s_map
 {
-	char		**block;
-	size_t		width;
-	size_t		height;
-	size_t		x_p_pos;
-	size_t		y_p_pos;
-}				t_map;
+	char				**block;
+	size_t				width;
+	size_t				height;
+	size_t				x_p_pos;
+	size_t				y_p_pos;
+}						t_map;
 
 typedef struct s_draw
 {
-	t_sprites	*spr;
-	size_t		x_visible_tiles;
-	size_t		y_visible_tiles;
-	float		x_cam_pos;
-	float		y_cam_pos;
-	float		x_offset;
-	float		y_offset;
-}				t_draw;
+	t_color				**screen;
+	t_sprites			*spr;
+	size_t				x_visible_tiles;
+	size_t				y_visible_tiles;
+	float				x_cam_pos;
+	float				y_cam_pos;
+	float				x_offset;
+	float				y_offset;
+}						t_draw;
 
 typedef struct s_game
 {
-	void		*mlx;
-	void		*mlx_win;
-	t_map		map;
-	t_draw		draw;
-}				t_game;
+	void				*mlx;
+	void				*mlx_win;
+	t_map				map;
+	t_draw				draw;
+}						t_game;
 
 /* Game Handling */
 
-void			free_game(t_game *g);
-int				exit_game(t_game *g);
-int				clean_and_exit_game(t_game *g, bool fail);
+void					free_game(t_game *g);
+int						exit_game(t_game *g);
+int						clean_and_exit_game(t_game *g, bool fail);
 
 /* Map Handling */
 
-char			get_tile(size_t x, size_t y, t_game g);
-void			set_tile(size_t x, size_t y, char c, t_game *g);
+char					get_tile(size_t x, size_t y, t_game g);
+void					set_tile(size_t x, size_t y, char c, t_game *g);
 
 /* Drawing */
 
-t_img			init_xpm(const char *path, t_game *g);
-void			put_img(void *img, int x, int y, t_game *g);
-int				rgb(unsigned char r, unsigned char g, unsigned char b);
-void			put_square(int color, int x, int y, t_game *g);
-bool			draw_tile(char c, size_t x, size_t y, t_game *g);
-void			draw_map(t_game *g);
-void			draw_player(t_game *g);
+t_img					*init_xpm(const char *path, t_game *g);
+void					put_img(void *img, int x, int y, t_game *g);
+int						rgb(unsigned char r, unsigned char g, unsigned char b);
+void					put_square(int color, int x, int y, t_game *g);
+bool					draw_tile(char c, size_t x, size_t y, t_game *g);
+void					draw_map(t_game *g);
+void					draw_player(t_game *g);
 
 /* Utils */
 
-void			merr(const char *s);
-void			p_free(void *p);
-void			pa_free(void **p);
-void			free_img(t_img *img, void *mlx);
-void			free_a_img(t_img **img, void *mlx);
+void					merr(const char *s);
+void					p_free(void *p);
+void					pa_free(void **p);
+void					free_img(t_img *img, void *mlx);
+void					free_a_img(t_img **img, void *mlx);
 
 #endif
