@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 17:37:24 by cviegas           #+#    #+#             */
-/*   Updated: 2024/02/27 16:25:48 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/02/27 17:56:53 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	init_game(t_game *g)
 
 void	init_sprites(t_game *g)
 {
-	g->screen = init_xpm("screen", g);
+	g->screen = init_screen(g);
 	g->draw.spr->player = init_xpm("e-squido", g);
 }
 

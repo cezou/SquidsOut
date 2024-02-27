@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 18:28:32 by cviegas           #+#    #+#             */
-/*   Updated: 2024/02/27 10:30:10 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/02/27 18:02:38 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ void	draw_color(t_color color, t_v2i pos, t_game *g)
 	if (pos[0] < 0 || pos[0] >= g->screen->size[0] || pos[1] < 0
 		|| pos[1] >= g->screen->size[1])
 		return ;
-	g->screen->pixels[pos[1] * g->screen->size[0] + pos[0]] = color;
+	((int *)g->screen->address)[pos[1] * g->screen->size[0]
+		+ pos[0]] = color.integer;
 }
 
 void	print_pixel(t_color color, t_v2i pos, t_game *g)
@@ -37,17 +38,17 @@ void	print_pixel(t_color color, t_v2i pos, t_game *g)
 
 void	print_screen(t_game *g)
 {
-	t_v2i	pos;
-
-	pos[1] = 0;
-	while (pos[1] < W_HEIGHT)
-	{
-		pos[0] = 0;
-		while (pos[0] < W_WIDTH)
-		{
-			print_pixel(get_color(*g->screen, pos), pos, g);
-			pos[0]++;
-		}
-		pos[1]++;
-	}
+	// t_v2i	pos;
+	mlx_put_image_to_window(g->mlx, g->mlx_win, g->screen->img, 0, 0);
+	// pos[1] = 0;
+	// while (pos[1] < W_HEIGHT)
+	// {
+	// 	pos[0] = 0;
+	// 	while (pos[0] < W_WIDTH)
+	// 	{
+	// 		print_pixel(get_color(*g->screen, pos), pos, g);
+	// 		pos[0]++;
+	// 	}
+	// 	pos[1]++;
+	// }
 }

@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 09:41:46 by cviegas           #+#    #+#             */
-/*   Updated: 2024/02/27 17:04:32 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/02/27 18:05:10 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,6 +134,7 @@ union					u_color
 typedef struct s_img
 {
 	void				*img;
+	void				*address;
 	t_color				*pixels;
 	t_v2i				size;
 }						t_img;
@@ -193,13 +194,13 @@ void					set_tile(size_t x, size_t y, char c, t_game *g);
 
 /* Drawing */
 
+t_img					*init_screen(t_game *g);
 t_img					*init_xpm(const char *path, t_game *g);
 
 t_color					get_color(t_img img, t_v2i pos);
 void					draw_color(t_color color, t_v2i pos, t_game *g);
 void					draw_img(t_img *img, t_v2i pos, t_game *g);
 void					draw_square(t_color color, int x, int y, t_game *g);
-void					print_pixel(t_color color, t_v2i pos, t_game *g);
 void					print_screen(t_game *g);
 
 int						rgb(unsigned char r, unsigned char g, unsigned char b);
