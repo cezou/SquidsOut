@@ -53,7 +53,7 @@ launch:
 	@./$(NAME) $1
 
 $(MLX): $(SQUID_SRCS)
-	@make -C $(MLX_DIR)
+	@make --silent -C $(MLX_DIR)
 
 $(LIBFT):
 	@make --silent -C $(L_DIR) 

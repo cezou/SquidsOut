@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 17:37:24 by cviegas           #+#    #+#             */
-/*   Updated: 2024/02/26 18:16:11 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/02/27 16:25:48 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ static void	get_p_pos(t_game *g)
 		{
 			if (g->map.block[i][j] == 'P')
 			{
-				g->map.x_p_pos = j;
+				g->draw.p_pos[0] = j;
 				g->draw.x_cam_pos = j;
-				g->map.y_p_pos = i;
+				g->draw.p_pos[1] = i;
 				g->draw.y_cam_pos = i;
 				return ;
 			}
@@ -40,8 +40,8 @@ static void	get_p_pos(t_game *g)
 void	init_data(t_game *g)
 {
 	get_p_pos(g);
-	g->draw.x_visible_tiles = W_WIDTH / g->map.width + 1;
-	g->draw.y_visible_tiles = W_HEIGHT / g->map.height + 1;
+	g->draw.x_visible_tiles = W_WIDTH / TILE_SIZE;
+	g->draw.y_visible_tiles = W_HEIGHT / TILE_SIZE;
 	g->draw.x_offset = g->draw.x_cam_pos - (float)g->draw.x_visible_tiles / 2;
 	g->draw.y_offset = g->draw.y_cam_pos - (float)g->draw.y_visible_tiles / 2;
 }
@@ -61,12 +61,14 @@ void	init_game(t_game *g)
 	g->map.width = 0;
 	g->mlx_win = NU;
 	g->mlx = NU;
+	ft_bzero(g->k, MAX_KEYS);
+	ft_bzero(g->m, MAX_MOUSE);
 }
 
 void	init_sprites(t_game *g)
 {
 	g->screen = init_xpm("screen", g);
-	g->draw.spr->player = init_xpm("squido", g);
+	g->draw.spr->player = init_xpm("e-squido", g);
 }
 
 void	init_window(t_game *g)

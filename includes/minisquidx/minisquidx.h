@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 09:41:46 by cviegas           #+#    #+#             */
-/*   Updated: 2024/02/26 18:11:11 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/02/27 17:04:32 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,13 @@
 /* Constant Value Defines */
 # define W_WIDTH 1920
 # define W_HEIGHT 1080
-# define TILE_SIZE 100
+# define TILE_SIZE 96
 # define NU NULL
 # define STDERR STDERR_FILENO
 # define FAIL EXIT_FAILURE
 # define SUCCESS EXIT_SUCCESS
+# define MAX_KEYS 65536
+# define MAX_MOUSE 6
 
 /* Print Color codes */
 # define BOLD "\033[1m"
@@ -151,23 +153,26 @@ typedef struct s_map
 	char				**block;
 	size_t				width;
 	size_t				height;
-	size_t				x_p_pos;
-	size_t				y_p_pos;
 }						t_map;
 
 typedef struct s_draw
 {
 	t_sprites			*spr;
+	t_v2f				p_pos;
 	size_t				x_visible_tiles;
 	size_t				y_visible_tiles;
 	float				x_cam_pos;
 	float				y_cam_pos;
+	t_v2f				offset;
 	float				x_offset;
 	float				y_offset;
+	t_v2f				map_offset;
 }						t_draw;
 
 typedef struct s_game
 {
+	bool				k[MAX_KEYS];
+	bool				m[MAX_MOUSE];
 	t_img				*screen;
 	void				*mlx;
 	void				*mlx_win;

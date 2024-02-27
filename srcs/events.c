@@ -6,24 +6,26 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 17:41:46 by cviegas           #+#    #+#             */
-/*   Updated: 2024/02/21 15:31:45 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/02/27 15:58:43 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/squids_out.h"
 
-int	key_events(int keysym, t_game *g)
+void	p_movements(t_game *g)
 {
-	if (keysym == XK_Escape)
+	if (g->k[XK_w] || g->k[XK_Up] || g->k[XK_space])
+		g->draw.p_pos[1] -= SPEED;
+	if (g->k[XK_s] || g->k[XK_Down])
+		g->draw.p_pos[1] += SPEED;
+	if (g->k[XK_a] || g->k[XK_Left])
+		g->draw.p_pos[0] -= SPEED;
+	if (g->k[XK_d] || g->k[XK_Right])
+		g->draw.p_pos[0] += SPEED;
+}
+
+void	escape(t_game *g)
+{
+	if (g->k[XK_Escape])
 		clean_and_exit_game(g, SUCCESS);
-	return (0);
 }
-
-void	events(t_game *g)
-{
-	mlx_loop_hook(g->mlx, update, g);
-	mlx_hook(g->mlx_win, KeyPress, KeyPressMask, key_events, g);
-	mlx_hook(g->mlx_win, DestroyNotify, StructureNotifyMask, exit_game, g);
-}
-
-// mlx_hook(m->mlx_win, ButtonPress, ButtonPressMask, mouse_hook, m);

@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 18:56:55 by cviegas           #+#    #+#             */
-/*   Updated: 2024/02/16 18:54:39 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/02/27 15:12:29 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,6 @@ int	main(int ac, char **av)
 	if (!g.mlx)
 		return (perr("Mlx init failed"), clean_and_exit_game(&g, 1), FAIL);
 	init_window(&g);
-	events(&g);
+	hooks(&g);
 	mlx_loop(g.mlx);
 }

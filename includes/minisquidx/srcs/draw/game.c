@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 12:36:03 by cviegas           #+#    #+#             */
-/*   Updated: 2024/02/27 11:25:34 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/02/27 17:17:25 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,13 @@ void	draw_square(t_color color, int x, int y, t_game *g)
 	t_v2i	i;
 
 	i[0] = 0;
-	while (i[0] < TILE_SIZE && x + i[0] < W_WIDTH)
+	while (i[0] < TILE_SIZE)
 	{
 		i[1] = 0;
-		while (i[1] < TILE_SIZE && y + i[1] < W_HEIGHT)
+		while (i[1] < TILE_SIZE)
 		{
-			draw_color(color, (t_v2i){x + i[0], y + i[1]}, g);
+			if (x + i[0] < W_WIDTH && y + i[1] < W_HEIGHT)
+				draw_color(color, (t_v2i){x + i[0], y + i[1]}, g);
 			i[1]++;
 		}
 		i[0]++;
@@ -57,10 +58,11 @@ void	draw_map(t_game *g)
 		x = 0;
 		while (g->map.block[y][x])
 		{
-			tile = get_tile(x, y, *g);
+			tile = get_tile(x + g->draw.x_offset, y + g->draw.y_offset, *g);
 			if (!tile)
 				break ;
-			if (!draw_tile(tile, (float)(x)*TILE_SIZE, (float)(y)*TILE_SIZE, g))
+			if (!draw_tile(tile, (float)(x)*TILE_SIZE - g->draw.map_offset[0],
+					(float)(y)*TILE_SIZE - g->draw.map_offset[1], g))
 				perr("Sprite or Color not found for this char.");
 			x++;
 		}
@@ -85,7 +87,18 @@ void	draw_img(t_img *spr, t_v2i pos, t_game *g)
 	}
 }
 
+t_v2i	fadd(t_v2f a, t_v2f b)
+{
+	return ((t_v2i){a[0] + b[0], a[1] + b[1]});
+}
+
+t_v2i	fsub(t_v2f a, t_v2f b)
+{
+	return ((t_v2i){(a[0] - b[0]) * TILE_SIZE, (a[1] - b[1]) * TILE_SIZE});
+}
+
 void	draw_player(t_game *g)
 {
-	draw_img(g->draw.spr->player, (t_v2i){0, 0}, g);
+	draw_img(g->draw.spr->player, fsub(g->draw.p_pos, (t_v2f){g->draw.x_offset,
+			g->draw.y_offset}), g);
 }
