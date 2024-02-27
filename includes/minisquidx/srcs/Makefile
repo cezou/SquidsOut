@@ -53,12 +53,12 @@ launch:
 	@./$(NAME) $1
 
 $(MLX): $(SQUID_SRCS)
-	@make -C $(MLX_DIR)
+	make -C $(MLX_DIR)
 
 $(LIBFT):
 	@make --silent -C $(L_DIR) 
 
-$(NAME): $(SRCS) $(MLX)
+$(NAME): $(SRCS) $(MLX) 
 	@make --silent -C $(MLX_DIR); \
 	$(CC) $(CFLAGS) $(MLXFLAGS) -I${I_DIR} $(SRCS) ${INCS} -o $(NAME) ; \
 	echo "$(GREEN)    ● Made SoLong$(RESET)"

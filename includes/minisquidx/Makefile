@@ -11,15 +11,12 @@ D_SRC = srcs
 D_DRAW = $(D_SRC)/draw
 D_UTILS = $(D_SRC)/utils
 D_MLX = minilibx-linux
-D_OBJ = objs
 L_DIR = quoicoulibft
 
 # FILES
 MLX = $(D_MLX)/libmlx.a
 SRCS = $(D_SRC)/*.c $(D_DRAW)/*.c $(D_UTILS)/*.c
-OBJS = $(patsubst $(D_SRC)/%.c,$(O_DIR)/%.o,$(SRCS))
-OBJS := $(patsubst $(D_DRAW)/%.c,$(O_DIR)/%.o,$(OBJS))
-OBJS := $(patsubst $(D_UTILS)/%.c,$(O_DIR)/%.o,$(OBJS))
+OBJS = $(SRCS:.c=.o)
 LIBFT = $(L_DIR)/libft.a
 
 # TEXT
@@ -38,16 +35,7 @@ RESET = \033[0m
 UP = \033[1A
 ERASE = \033[0J
 
-all: $(O_DIR) $(MLX) $(LIBFT) $(NAME)
-
-$(O_DIR):
-	mkdir -p $(O_DIR)
-
-$(O_DIR)/%.o: %.c
-	$(CC) $(CFLAGS) -I$(D_SRC) -I$(D_DRAW) -I$(D_UTILS) -c $< -o $@
-
-# VPATH
-vpath %.c $(D_SRC) $(D_DRAW) $(D_UTILS)
+all : $(LIBFT) $(NAME)
 
 $(LIBFT):
 	@if [ ! -d $(L_DIR) ]; then \
@@ -76,6 +64,7 @@ $(NAME): $(MLX) $(SRCS)
 		$(CC) $(CFLAGS) -c $$file -o $${file%.c}.o -I. ; \
 	done ; \
 	ar rcs $(NAME) $(OBJS) > /dev/null 2>&1; \
+	make --silent clean ; \
 	echo "$(UP)$(ERASE)$(BOLD)$(PINK)  ● MiniLibX got BOOSTED by MiniSquidX 🦑$(RESET)"
 
 clean:

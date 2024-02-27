@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 17:40:31 by cviegas           #+#    #+#             */
-/*   Updated: 2024/02/27 10:55:28 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/02/27 11:19:30 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	destroy_spr(t_game *g)
 	free_img(g->draw.spr->cage, g->mlx);
 	p_free(g->draw.spr);
 	free_img(g->screen, g->mlx);
-	perr("squidgame");
+	perr("squidgeeaeme");
 }
 
 void	free_game(t_game *g)
