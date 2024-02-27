@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 17:37:24 by cviegas           #+#    #+#             */
-/*   Updated: 2024/02/26 12:05:50 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/02/26 18:16:11 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ void	init_game(t_game *g)
 	g->draw.spr = malloc(sizeof(t_sprites));
 	if (!g->draw.spr)
 		return (exit(FAIL));
+	g->screen = NU;
 	g->draw.spr->squids = NU;
 	g->draw.spr->player = NU;
 	g->draw.spr->bg = NU;
@@ -64,6 +65,7 @@ void	init_game(t_game *g)
 
 void	init_sprites(t_game *g)
 {
+	g->screen = init_xpm("screen", g);
 	g->draw.spr->player = init_xpm("squido", g);
 }
 

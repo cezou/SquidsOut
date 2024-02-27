@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 09:41:46 by cviegas           #+#    #+#             */
-/*   Updated: 2024/02/26 12:04:40 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/02/26 18:11:11 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,39 +74,42 @@
 # undef DARK_PURPLE
 # undef DARK_PINK
 # undef DARK_BROWN
-# define BLACK 0x000000
-# define WHITE 0xFFFFFF
-# define RED 0xFF0000
-# define GREEN 0x00FF00
-# define BLUE 0x0000FF
-# define YELLOW 0xFFFF00
-# define CYAN 0x00FFFF
-# define MAGENTA 0xFF00FF
-# define ORANGE 0xFFA500
-# define PURPLE 0x800080
-# define PINK 0xFFC0CB
-# define BROWN 0xA52A2A
-# define GREY 0x808080
-# define LIGHT_GREY 0xD3D3D3
-# define DARK_GREY 0xA9A9A9
-# define LIGHT_BLUE 0xADD8E6
-# define LIGHT_GREEN 0x90EE90
-# define LIGHT_YELLOW 0xFFFFE0
-# define LIGHT_CYAN 0xE0FFFF
-# define LIGHT_MAGENTA 0xFFB6C1
-# define LIGHT_ORANGE 0xFFD700
-# define LIGHT_PURPLE 0x9370DB
-# define LIGHT_PINK 0xFFB6C1
-# define LIGHT_BROWN 0xCD853F
-# define DARK_BLUE 0x00008B
-# define DARK_GREEN 0x006400
-# define DARK_YELLOW 0x808000
-# define DARK_CYAN 0x008080
-# define DARK_MAGENTA 0x8B008B
-# define DARK_ORANGE 0xFF8C00
-# define DARK_PURPLE 0x800080
-# define DARK_PINK 0xFF1493
-# define DARK_BROWN 0x8B4513
+
+// Redefine les couleurs mais avec ce format "(t_color)0xFF000000"
+
+# define BLACK (t_color)(0xFF000000)
+# define WHITE (t_color)(0xFFFFFFFF)
+# define RED (t_color)(0xFF0000FF)
+# define GREEN (t_color)(0xFF00FF00)
+# define BLUE (t_color)(0xFFFF0000)
+# define YELLOW (t_color)(0xFF00FFFF)
+# define CYAN (t_color)(0xFFFFFF00)
+# define MAGENTA (t_color)(0xFFFF00FF)
+# define ORANGE (t_color)(0xFF00A5FF)
+# define PURPLE (t_color)(0xFF800080)
+# define PINK (t_color)(0xFFC71585)
+# define BROWN (t_color)(0xFFA52A2A)
+# define GREY (t_color)(0xFF808080)
+# define LIGHT_GREY (t_color)(0xFFD3D3D3)
+# define DARK_GREY (t_color)(0xFFA9A9A9)
+# define LIGHT_BLUE (t_color)(0xFFADD8E6)
+# define LIGHT_GREEN (t_color)(0xFF90EE90)
+# define LIGHT_YELLOW (t_color)(0xFFFFFFE0)
+# define LIGHT_CYAN (t_color)(0xFFE0FFFF)
+# define LIGHT_MAGENTA (t_color)(0xFFF08080)
+# define LIGHT_ORANGE (t_color)(0xFF20B2AA)
+# define LIGHT_PURPLE (t_color)(0xFF9370DB)
+# define LIGHT_PINK (t_color)(0xFFFFA07A)
+# define LIGHT_BROWN (t_color)(0xFFCD853F)
+# define DARK_BLUE (t_color)(0xFF00008B)
+# define DARK_GREEN (t_color)(0xFF006400)
+# define DARK_YELLOW (t_color)(0xFF8B0000)
+# define DARK_CYAN (t_color)(0xFF8B8B00)
+# define DARK_MAGENTA (t_color)(0xFF8B008B)
+# define DARK_ORANGE (t_color)(0xFF008B8B)
+# define DARK_PURPLE (t_color)(0xFF4B0082)
+# define DARK_PINK (t_color)(0xFF8B5F65)
+# define DARK_BROWN (t_color)(0xFF8B4513)
 
 /* Structures */
 
@@ -116,12 +119,13 @@ typedef union u_color	t_color;
 
 union					u_color
 {
-	t_hexa				color;
+	__uint32_t			integer;
 	struct
 	{
-		t_hexa			r;
-		t_hexa			g;
-		t_hexa			b;
+		__uint8_t		r;
+		__uint8_t		g;
+		__uint8_t		b;
+		__uint8_t		a;
 	};
 };
 
@@ -129,8 +133,7 @@ typedef struct s_img
 {
 	void				*img;
 	t_color				*pixels;
-	size_t				width;
-	size_t				height;
+	t_v2i				size;
 }						t_img;
 
 // Here you need to put your own images.
@@ -154,7 +157,6 @@ typedef struct s_map
 
 typedef struct s_draw
 {
-	t_color				**screen;
 	t_sprites			*spr;
 	size_t				x_visible_tiles;
 	size_t				y_visible_tiles;
@@ -166,6 +168,7 @@ typedef struct s_draw
 
 typedef struct s_game
 {
+	t_img				*screen;
 	void				*mlx;
 	void				*mlx_win;
 	t_map				map;
@@ -186,9 +189,15 @@ void					set_tile(size_t x, size_t y, char c, t_game *g);
 /* Drawing */
 
 t_img					*init_xpm(const char *path, t_game *g);
-void					put_img(void *img, int x, int y, t_game *g);
+
+t_color					get_color(t_img img, t_v2i pos);
+void					draw_color(t_color color, t_v2i pos, t_game *g);
+void					draw_img(t_img *img, t_v2i pos, t_game *g);
+void					draw_square(t_color color, int x, int y, t_game *g);
+void					print_pixel(t_color color, t_v2i pos, t_game *g);
+void					print_screen(t_game *g);
+
 int						rgb(unsigned char r, unsigned char g, unsigned char b);
-void					put_square(int color, int x, int y, t_game *g);
 bool					draw_tile(char c, size_t x, size_t y, t_game *g);
 void					draw_map(t_game *g);
 void					draw_player(t_game *g);

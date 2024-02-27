@@ -11,6 +11,9 @@ I_DIR = includes
 MLX_DIR = $(I_DIR)/minisquidx
 L_DIR = $(MLX_DIR)/quoicoulibft
 
+D_SRC = $(MLX_DIR)/srcs
+D_DRAW = $(D_SRC)/draw
+D_UTILS = $(D_SRC)/utils
 S_DIR = srcs
 MH_DIR = $(S_DIR)/map_handling
 M_DIR = maps
@@ -19,6 +22,7 @@ O_DIR = objs
 
 
 # FILES
+SQUID_SRCS = $(D_SRC)/*.c $(D_DRAW)/*.c $(D_UTILS)/*.c
 SRCS = $(S_DIR)/*.c $(MH_DIR)/*.c
 LIBFT = $(L_DIR)/libft.a
 MLX = $(MLX_DIR)/minisquidx.a
@@ -48,13 +52,13 @@ v: $(MLX) $(LIBFT) $(NAME)
 launch:
 	@./$(NAME) $1
 
-$(MLX):
-	@make --silent -C $(MLX_DIR)
+$(MLX): $(SQUID_SRCS)
+	make -C $(MLX_DIR)
 
 $(LIBFT):
-	@make --silent -C $(L_DIR)
+	@make --silent -C $(L_DIR) 
 
-$(NAME): $(SRCS)
+$(NAME): $(SRCS) $(MLX) 
 	@make --silent -C $(MLX_DIR); \
 	$(CC) $(CFLAGS) $(MLXFLAGS) -I${I_DIR} $(SRCS) ${INCS} -o $(NAME) ; \
 	echo "$(GREEN)    ● Made SoLong$(RESET)"

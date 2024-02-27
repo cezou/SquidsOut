@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 18:49:00 by cviegas           #+#    #+#             */
-/*   Updated: 2024/02/22 11:37:04 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/02/27 10:21:12 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,17 @@ void	update_game_data(t_game *g)
 {
 	update_camera(g);
 }
-
-void	draw_screen(t_game *g)
+void	update_screen(t_game *g)
 {
+	update_game_data(g);
 	draw_map(g);
+	draw_player(g);
+	draw_square(PINK, 15, 15, g);
 }
 
 int	update(t_game *g)
 {
-	update_game_data(g);
-	draw_screen(g);
-	put_square(WHITE, 0, 0, g);
-	draw_player(g);
+	update_screen(g);
+	print_screen(g);
 	return (0);
 }
