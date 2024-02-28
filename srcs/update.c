@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 18:49:00 by cviegas           #+#    #+#             */
-/*   Updated: 2024/02/27 17:38:31 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/02/28 14:53:21 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ int	update(t_game *g)
 {
 	update_screen(g);
 	print_screen(g);
-	usleep(1000);
 	// printf("p_pos : X= %f\n        Y= %f\n", g->draw.p_pos[0],
 	// 	g->draw.p_pos[1]);
 	return (0);

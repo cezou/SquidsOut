@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 12:36:03 by cviegas           #+#    #+#             */
-/*   Updated: 2024/02/27 17:26:18 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/02/28 16:23:13 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ static void	clamp_cam(t_game *g)
 	clamp_cam_topleft(&g->draw.y_offset);
 	if (g->draw.x_offset > g->map.width - g->draw.x_visible_tiles - 1)
 		g->draw.x_offset = g->map.width - g->draw.x_visible_tiles - 1;
-	if (g->draw.y_offset > g->map.height - g->draw.y_visible_tiles)
-		g->draw.y_offset = g->map.height - g->draw.y_visible_tiles;
+	if (g->draw.y_offset > g->map.height - g->draw.y_visible_tiles - 0.25)
+		g->draw.y_offset = g->map.height - g->draw.y_visible_tiles - 0.25;
 }
 
 // Stick the camera to the player and offset if on boundaries.
@@ -38,7 +38,7 @@ static void	update_cam_data(t_game *g)
 	g->draw.y_offset = g->draw.y_cam_pos - (float)g->draw.y_visible_tiles / 2;
 }
 
-static void	cam_offset(t_game *g)
+static void	map_offset(t_game *g)
 {
 	g->draw.map_offset[0] = (g->draw.x_offset - (int)g->draw.x_offset)
 		* TILE_SIZE;
@@ -52,5 +52,5 @@ void	update_camera(t_game *g)
 {
 	update_cam_data(g);
 	clamp_cam(g);
-	cam_offset(g);
+	map_offset(g);
 }

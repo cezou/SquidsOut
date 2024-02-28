@@ -6,11 +6,26 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 12:36:03 by cviegas           #+#    #+#             */
-/*   Updated: 2024/02/27 17:17:25 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/02/28 16:19:37 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minisquidx.h"
+
+t_v2i	fadd(t_v2f a, t_v2f b)
+{
+	return ((t_v2i){a[0] + b[0], a[1] + b[1]});
+}
+
+t_v2i	fsub(t_v2f a, t_v2f b)
+{
+	return ((t_v2i){(a[0] - b[0]) * TILE_SIZE, (a[1] - b[1]) * TILE_SIZE});
+}
+
+t_v2i	i_add_s(t_v2i a, t_v2i b, size_t s)
+{
+	return ((t_v2i){(a[0] + b[0]) * s - s, (a[1] + b[1]) * s - s});
+}
 
 void	draw_square(t_color color, int x, int y, t_game *g)
 {
@@ -33,7 +48,7 @@ void	draw_square(t_color color, int x, int y, t_game *g)
 bool	draw_tile(char c, size_t x, size_t y, t_game *g)
 {
 	if (c == '1' || c == 'P')
-		draw_square(DARK_BROWN, x, y, g);
+		draw_scaled_img(g->draw.spr->block, (t_v2i){x, y}, 3, g);
 	else if (c == '0')
 		draw_square(DARK_BLUE, x, y, g);
 	else if (c == 'E')
@@ -87,18 +102,37 @@ void	draw_img(t_img *spr, t_v2i pos, t_game *g)
 	}
 }
 
-t_v2i	fadd(t_v2f a, t_v2f b)
+void	draw_scaled_img(t_img *spr, t_v2i pos, size_t scale, t_game *g)
 {
-	return ((t_v2i){a[0] + b[0], a[1] + b[1]});
-}
+	t_v2i	i;
+	t_v2i	s;
 
-t_v2i	fsub(t_v2f a, t_v2f b)
-{
-	return ((t_v2i){(a[0] - b[0]) * TILE_SIZE, (a[1] - b[1]) * TILE_SIZE});
+	i[1] = 0;
+	while (i[1] < spr->size[1] && i[1] + pos[1] < W_HEIGHT)
+	{
+		i[0] = 0;
+		while (i[0] < spr->size[0] && i[0] + pos[0] < W_WIDTH)
+		{
+			s[1] = 0;
+			while (s[1] < scale)
+			{
+				s[0] = 0;
+				while (s[0] < scale)
+				{
+					draw_color(get_color(*spr, i), s + pos + i * (t_v2i){scale,
+						scale}, g);
+					s[0]++;
+				}
+				s[1]++;
+			}
+			i[0]++;
+		}
+		i[1]++;
+	}
 }
 
 void	draw_player(t_game *g)
 {
-	draw_img(g->draw.spr->player, fsub(g->draw.p_pos, (t_v2f){g->draw.x_offset,
-			g->draw.y_offset}), g);
+	draw_scaled_img(g->draw.spr->player, fsub(g->draw.p_pos,
+			(t_v2f){g->draw.x_offset, g->draw.y_offset}), 3, g);
 }

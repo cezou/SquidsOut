@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 09:41:46 by cviegas           #+#    #+#             */
-/*   Updated: 2024/02/27 18:05:10 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/02/28 14:53:04 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -200,6 +200,8 @@ t_img					*init_xpm(const char *path, t_game *g);
 t_color					get_color(t_img img, t_v2i pos);
 void					draw_color(t_color color, t_v2i pos, t_game *g);
 void					draw_img(t_img *img, t_v2i pos, t_game *g);
+void					draw_scaled_img(t_img *spr, t_v2i pos, size_t scale,
+							t_game *g);
 void					draw_square(t_color color, int x, int y, t_game *g);
 void					print_screen(t_game *g);
 
