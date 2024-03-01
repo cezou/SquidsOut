@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 12:36:03 by cviegas           #+#    #+#             */
-/*   Updated: 2024/02/28 16:19:37 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/01 18:11:39 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,8 +131,43 @@ void	draw_scaled_img(t_img *spr, t_v2i pos, size_t scale, t_game *g)
 	}
 }
 
+void	idle_animation(t_game *g, t_sprites *s)
+{
+	if (is_pressed(XK_o, g) && !s->p_idle.is_playing)
+		(start_stopwatch(&s->p_idle.time), g->draw.spr->p_idle.is_playing = 1);
+	if (s->p_idle.is_playing)
+	{
+		update_stopwatch(&s->p_idle.time);
+		if (!s->p_idle.direction && (get_time(s->p_idle.time) > (s->p_idle.frame
+					+ 1) * 120))
+			s->p_idle.frame++;
+		if (s->p_idle.direction && (get_time(s->p_idle.time) > (8
+					- s->p_idle.frame + 1) * 120))
+			s->p_idle.frame--;
+		if (s->p_idle.frame == 8)
+		{
+			s->p_idle.direction = 1;
+			start_stopwatch(&s->p_idle.time);
+			s->p_idle.frame--;
+		}
+		if (s->p_idle.frame == -1)
+		{
+			s->p_idle.direction = 0;
+			s->p_idle.frame++;
+			start_stopwatch(&s->p_idle.time);
+		}
+	}
+	s->player->pixels = s->p_idle.sprite[s->p_idle.frame]->pixels;
+}
+
+void	update_player_sprite(t_game *g, t_sprites *s)
+{
+	idle_animation(g, s);
+}
+
 void	draw_player(t_game *g)
 {
+	update_player_sprite(g, g->draw.spr);
 	draw_scaled_img(g->draw.spr->player, fsub(g->draw.p_pos,
 			(t_v2f){g->draw.x_offset, g->draw.y_offset}), 3, g);
 }

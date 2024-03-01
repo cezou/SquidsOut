@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 09:41:46 by cviegas           #+#    #+#             */
-/*   Updated: 2024/02/28 14:53:04 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/01 18:17:29 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include "minilibx-linux/mlx.h"
 # include "quoicoulibft/libft.h"
 # include "stdbool.h"
+# include "time.h"
 # include "vec2.h"
 # include <X11/X.h>
 # include <X11/keysym.h>
@@ -33,8 +34,15 @@
 # define STDERR STDERR_FILENO
 # define FAIL EXIT_FAILURE
 # define SUCCESS EXIT_SUCCESS
-# define MAX_KEYS 65536
+
+/* Key Defines */
+# define MAX_KEYS 65535
 # define MAX_MOUSE 6
+# define MOUSE_LEFT MAX_KEYS + 1
+# define MOUSE_RIGHT MAX_KEYS + 2
+# define MOUSE_MIDDLE MAX_KEYS + 3
+# define MOUSE_SCROLL_UP MAX_KEYS + 4
+# define MOUSE_SCROLL_DOWN MAX_KEYS + 5
 
 /* Print Color codes */
 # define BOLD "\033[1m"
@@ -115,6 +123,17 @@
 
 /* Structures */
 
+/* Stopwatch */
+typedef struct s_stopwatch
+{
+	clock_t				start;
+	clock_t				time;
+}						t_stopwatch;
+
+void					start_stopwatch(t_stopwatch *sw);
+void					update_stopwatch(t_stopwatch *sw);
+clock_t					get_time(t_stopwatch sw);
+
 // Unsigned char is perfect for colors, since it's 0-255.
 typedef __uint8_t		t_hexa;
 typedef union u_color	t_color;
@@ -139,12 +158,21 @@ typedef struct s_img
 	t_v2i				size;
 }						t_img;
 
+typedef struct s_animated_img
+{
+	t_img				*sprite[9];
+	t_stopwatch			time;
+	int					frame;
+	bool				is_playing;
+	bool				direction;
+}						t_animated_img;
 // Here you need to put your own images.
 typedef struct s_sprites
 {
 	t_img				*bg;
 	t_img				*block;
 	t_img				*player;
+	t_animated_img		p_idle;
 	t_img				**squids;
 	t_img				*cage;
 }						t_sprites;
@@ -172,13 +200,13 @@ typedef struct s_draw
 
 typedef struct s_game
 {
-	bool				k[MAX_KEYS];
-	bool				m[MAX_MOUSE];
+	bool				keys[MAX_KEYS + MAX_MOUSE];
 	t_img				*screen;
 	void				*mlx;
 	void				*mlx_win;
 	t_map				map;
 	t_draw				draw;
+	t_stopwatch			time;
 }						t_game;
 
 /* Game Handling */
@@ -192,10 +220,19 @@ int						clean_and_exit_game(t_game *g, bool fail);
 char					get_tile(size_t x, size_t y, t_game g);
 void					set_tile(size_t x, size_t y, char c, t_game *g);
 
+/* Key Mapping */
+int						k_press(int keysym, t_game *g);
+int						k_release(int keysym, t_game *g);
+int						m_press(int button, t_game *g);
+int						m_release(int button, t_game *g);
+bool					is_pressed(int key, t_game *g);
+
 /* Drawing */
 
 t_img					*init_screen(t_game *g);
 t_img					*init_xpm(const char *path, t_game *g);
+t_img					*init_animated_xpm(const char *folder_path,
+							size_t file_nb, t_game *g);
 
 t_color					get_color(t_img img, t_v2i pos);
 void					draw_color(t_color color, t_v2i pos, t_game *g);

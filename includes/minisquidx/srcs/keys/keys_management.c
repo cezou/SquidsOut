@@ -1,40 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   update.c                                           :+:      :+:    :+:   */
+/*   keys_management.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/12 18:49:00 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/01 12:30:23 by cviegas          ###   ########.fr       */
+/*   Created: 2024/03/01 10:48:59 by cviegas           #+#    #+#             */
+/*   Updated: 2024/03/01 11:21:11 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/squids_out.h"
+#include "../../minisquidx.h"
 
-void	events(t_game *g)
+bool	is_pressed(int key, t_game *g)
 {
-	p_movements(g);
-	escape(g);
+	if (g->keys[key])
+		return (1);
+	return (0);
 }
 
-void	update_game_data(t_game *g)
+int	k_press(int keysym, t_game *g)
 {
-	events(g);
-	update_camera(g);
-}
-void	update_screen(t_game *g)
-{
-	update_game_data(g);
-	draw_map(g);
-	draw_player(g);
+	g->keys[keysym] = true;
+	return (0);
 }
 
-int	update(t_game *g)
+int	k_release(int keysym, t_game *g)
 {
-	update_screen(g);
-	print_screen(g);
-	// printf("p_pos : X= %f\n        Y= %f\n", g->draw.p_pos[0],
-	// 	g->draw.p_pos[1]);
+	g->keys[keysym] = false;
+	return (0);
+}
+
+int	m_press(int button, t_game *g)
+{
+	g->keys[button] = true;
+	return (0);
+}
+
+int	m_release(int button, t_game *g)
+{
+	g->keys[button] = false;
 	return (0);
 }

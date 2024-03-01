@@ -1,40 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   update.c                                           :+:      :+:    :+:   */
+/*   time.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/12 18:49:00 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/01 12:30:23 by cviegas          ###   ########.fr       */
+/*   Created: 2024/03/01 11:25:04 by cviegas           #+#    #+#             */
+/*   Updated: 2024/03/01 11:40:21 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/squids_out.h"
+#include "../minisquidx.h"
 
-void	events(t_game *g)
+void	start_stopwatch(t_stopwatch *sw)
 {
-	p_movements(g);
-	escape(g);
+	sw->start = clock() / 1000;
 }
 
-void	update_game_data(t_game *g)
+void	update_stopwatch(t_stopwatch *sw)
 {
-	events(g);
-	update_camera(g);
-}
-void	update_screen(t_game *g)
-{
-	update_game_data(g);
-	draw_map(g);
-	draw_player(g);
+	sw->time = clock() / 1000 - sw->start;
 }
 
-int	update(t_game *g)
+clock_t	get_time(t_stopwatch sw)
 {
-	update_screen(g);
-	print_screen(g);
-	// printf("p_pos : X= %f\n        Y= %f\n", g->draw.p_pos[0],
-	// 	g->draw.p_pos[1]);
-	return (0);
+	return (sw.time);
 }

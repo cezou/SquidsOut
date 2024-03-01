@@ -10,12 +10,13 @@ MLXFLAGS = -I/usr/include -Imlx_linux -O3 -lXext -lX11 -lm
 D_SRC = srcs
 D_DRAW = $(D_SRC)/draw
 D_UTILS = $(D_SRC)/utils
+D_KEYS = $(D_SRC)/keys
 D_MLX = minilibx-linux
 L_DIR = quoicoulibft
 
 # FILES
 MLX = $(D_MLX)/libmlx.a
-SRCS = $(D_SRC)/*.c $(D_DRAW)/*.c $(D_UTILS)/*.c
+SRCS = $(D_SRC)/*.c $(D_DRAW)/*.c $(D_UTILS)/*.c $(D_KEYS)/*.c
 OBJS = $(SRCS:.c=.o)
 LIBFT = $(L_DIR)/libft.a
 

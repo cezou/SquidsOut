@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 17:41:46 by cviegas           #+#    #+#             */
-/*   Updated: 2024/02/27 15:58:43 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/01 11:11:25 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,18 @@
 
 void	p_movements(t_game *g)
 {
-	if (g->k[XK_w] || g->k[XK_Up] || g->k[XK_space])
+	if (is_pressed(XK_w, g) || is_pressed(XK_Up, g) || is_pressed(XK_space, g))
 		g->draw.p_pos[1] -= SPEED;
-	if (g->k[XK_s] || g->k[XK_Down])
+	if (is_pressed(XK_s, g) || is_pressed(XK_Down, g))
 		g->draw.p_pos[1] += SPEED;
-	if (g->k[XK_a] || g->k[XK_Left])
+	if (is_pressed(XK_a, g) || is_pressed(XK_Left, g))
 		g->draw.p_pos[0] -= SPEED;
-	if (g->k[XK_d] || g->k[XK_Right])
+	if (is_pressed(XK_d, g) || is_pressed(XK_Right, g))
 		g->draw.p_pos[0] += SPEED;
 }
 
 void	escape(t_game *g)
 {
-	if (g->k[XK_Escape])
+	if (is_pressed(XK_Escape, g))
 		clean_and_exit_game(g, SUCCESS);
 }
