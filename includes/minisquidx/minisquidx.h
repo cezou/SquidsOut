@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 09:41:46 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/01 18:17:29 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/01 19:28:50 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,7 @@ typedef struct s_stopwatch
 {
 	clock_t				start;
 	clock_t				time;
+	float				elapsed_time;
 }						t_stopwatch;
 
 void					start_stopwatch(t_stopwatch *sw);
@@ -188,6 +189,8 @@ typedef struct s_draw
 {
 	t_sprites			*spr;
 	t_v2f				p_pos;
+	t_v2f				p_new_pos;
+	t_v2f				p_vel;
 	size_t				x_visible_tiles;
 	size_t				y_visible_tiles;
 	float				x_cam_pos;
@@ -214,6 +217,8 @@ typedef struct s_game
 void					free_game(t_game *g);
 int						exit_game(t_game *g);
 int						clean_and_exit_game(t_game *g, bool fail);
+float					elapsed_time(t_game *g);
+void					update_elapsed_time(t_game *g);
 
 /* Map Handling */
 

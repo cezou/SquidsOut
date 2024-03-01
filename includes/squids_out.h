@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 18:58:17 by cviegas           #+#    #+#             */
-/*   Updated: 2024/02/27 17:15:19 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/01 19:52:47 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # define W_LIMIT 200
 # define H_LIMIT 100
 # define S_SIZE 32
-# define SPEED 0.21
+# define SPEED 7
 
 // typedef struct s_player
 // {
@@ -68,6 +68,7 @@ void		update_camera(t_game *g);
 void		hooks(t_game *g);
 void		events(t_game *g);
 void		p_movements(t_game *g);
+void		collisions(t_game *g);
 void		escape(t_game *g);
 
 // enum

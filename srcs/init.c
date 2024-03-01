@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 17:37:24 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/01 18:17:20 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/01 18:51:51 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void	init_data(t_game *g)
 	g->draw.y_visible_tiles = W_HEIGHT / TILE_SIZE;
 	g->draw.x_offset = g->draw.x_cam_pos - (float)g->draw.x_visible_tiles / 2;
 	g->draw.y_offset = g->draw.y_cam_pos - (float)g->draw.y_visible_tiles / 2;
+	g->draw.p_vel = (t_v2f){0, 0};
 }
 
 void	init_game(t_game *g)
