@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 12:36:03 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/01 18:11:39 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/04 11:57:30 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,9 @@ void	draw_square(t_color color, int x, int y, t_game *g)
 
 bool	draw_tile(char c, size_t x, size_t y, t_game *g)
 {
-	if (c == '1' || c == 'P')
+	if (c == '1')
 		draw_scaled_img(g->draw.spr->block, (t_v2i){x, y}, 3, g);
-	else if (c == '0')
+	else if (c == '0' || c == 'P')
 		draw_square(DARK_BLUE, x, y, g);
 	else if (c == 'E')
 		draw_square(GREEN, x, y, g);
@@ -76,8 +76,8 @@ void	draw_map(t_game *g)
 			tile = get_tile(x + g->draw.x_offset, y + g->draw.y_offset, *g);
 			if (!tile)
 				break ;
-			if (!draw_tile(tile, (float)(x)*TILE_SIZE - g->draw.map_offset[0],
-					(float)(y)*TILE_SIZE - g->draw.map_offset[1], g))
+			if (!draw_tile(tile, (x)*TILE_SIZE - g->draw.map_offset[0],
+					(y)*TILE_SIZE - g->draw.map_offset[1], g))
 				perr("Sprite or Color not found for this char.");
 			x++;
 		}

@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 18:58:17 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/01 19:52:47 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/04 10:40:13 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,7 @@
 # define H_LIMIT 100
 # define S_SIZE 32
 # define SPEED 7
-
-// typedef struct s_player
-// {
-// 	t_v2f		pos;
-// }				t_player;
+# define BOTH 3 / 4
 
 /* FUNCTIONS */
 /* 	Game & Mlx Handling */

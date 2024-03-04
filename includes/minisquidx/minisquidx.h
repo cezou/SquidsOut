@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 09:41:46 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/01 19:28:50 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/04 11:57:36 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -203,6 +203,7 @@ typedef struct s_draw
 
 typedef struct s_game
 {
+	t_v2f				tiles_traveled;
 	bool				keys[MAX_KEYS + MAX_MOUSE];
 	t_img				*screen;
 	void				*mlx;

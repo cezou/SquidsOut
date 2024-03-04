@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 18:49:00 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/01 19:35:23 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/04 11:57:30 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	events(t_game *g)
 void	update_game_data(t_game *g)
 {
 	update_elapsed_time(g);
-	printf("Elapsed Time: %f\n", elapsed_time(g));
+	// printf("Elapsed Time: %f\n", elapsed_time(g));
 	events(g);
 	update_camera(g);
 }

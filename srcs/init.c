@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 17:37:24 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/01 18:51:51 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/04 12:10:04 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,18 @@ void	init_data(t_game *g)
 	g->draw.y_visible_tiles = W_HEIGHT / TILE_SIZE;
 	g->draw.x_offset = g->draw.x_cam_pos - (float)g->draw.x_visible_tiles / 2;
 	g->draw.y_offset = g->draw.y_cam_pos - (float)g->draw.y_visible_tiles / 2;
-	g->draw.p_vel = (t_v2f){0, 0};
+	g->draw.p_vel[0] = 0;
+	g->draw.p_vel[1] = 0;
+	g->draw.p_new_pos[0] = 0;
+	g->draw.p_new_pos[1] = 0;
+	g->draw.p_pos[0] = 0;
+	g->draw.p_pos[1] = 0;
+	g->draw.map_offset[0] = 0;
+	g->draw.map_offset[1] = 0;
+	g->draw.offset[0] = 0;
+	g->draw.offset[1] = 0;
+	g->tiles_traveled = (t_v2f){0, 0};
+	perr("Squidgame de merde");
 }
 
 void	init_game(t_game *g)
@@ -56,7 +67,7 @@ void	init_game(t_game *g)
 	// g->draw.spr->p_idle = malloc(sizeof(t_animated_img));
 	// if (!g->draw.spr->p_idle)
 	// 	return (free(g->draw.spr), exit(FAIL));
-	// ft_bzero(g->draw.spr->p_idle, 8);
+	ft_bzero(g->draw.spr->p_idle.sprite, 8);
 	g->screen = NU;
 	g->draw.spr->squids = NU;
 	g->draw.spr->player = NU;

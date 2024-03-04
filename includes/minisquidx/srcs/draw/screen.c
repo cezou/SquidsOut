@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 18:28:32 by cviegas           #+#    #+#             */
-/*   Updated: 2024/02/27 18:07:07 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/04 12:05:32 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,15 @@ t_color	get_color(t_img img, t_v2i pos)
 
 void	draw_color(t_color color, t_v2i pos, t_game *g)
 {
+	if (pos[1] * g->screen->size[0] + pos[0] < 0 || pos[1] * g->screen->size[0]
+		+ pos[0] > g->screen->size[0] * g->screen->size[1])
+		return ;
 	if (color.r == 0 && color.g == 0 && color.b == 0)
 		return ;
 	if (pos[0] < 0 || pos[0] >= g->screen->size[0] || pos[1] < 0
 		|| pos[1] >= g->screen->size[1])
 		return ;
-	((int *)g->screen->address)[pos[1] * g->screen->size[0]
-		+ pos[0]] = color.integer;
+	g->screen->pixels[pos[1] * g->screen->size[0] + pos[0]] = color;
 }
 
 void	print_screen(t_game *g)
