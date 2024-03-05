@@ -41,7 +41,7 @@ all : $(LIBFT) $(NAME)
 $(LIBFT):
 	@if [ ! -d $(L_DIR) ]; then \
 		echo "$(MAGENTA)Cloning QuoicouLibft...$(RESET)" ; \
-		git clone git@github.com:cezou/QuoicouLibft.git $(L_DIR) > /dev/null 2>&1; \
+		git clone https://github.com/cezou/QuoicouLibft.git $(L_DIR) > /dev/null 2>&1; \
 		echo "$(UP)$(ERASE)$(BOLD)$(GREEN)QuoicouLibft Cloned$(RESET)" ; \
 	fi
 	@make --silent -C $(L_DIR)
