@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 09:41:46 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/04 11:57:36 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/05 20:05:16 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@
 # define P_RED "\033[31m"
 # define P_GREEN "\033[32m"
 # define RESET "\033[0m"
+# define CLEAR "\x1b[2J\x1b[H"
 
 /* Int Color codes */
 # undef BLACK
@@ -87,7 +88,7 @@
 
 // Redefine les couleurs mais avec ce format "(t_color)0xFF000000"
 
-# define BLACK (t_color)(0xFF000000)
+# define BLACK (t_color)0xFF000000
 # define WHITE (t_color)(0xFFFFFFFF)
 # define RED (t_color)(0xFF0000FF)
 # define GREEN (t_color)(0xFF00FF00)
@@ -187,6 +188,7 @@ typedef struct s_map
 
 typedef struct s_draw
 {
+	bool				first_frame;
 	t_sprites			*spr;
 	t_v2f				p_pos;
 	t_v2f				p_new_pos;
@@ -203,6 +205,9 @@ typedef struct s_draw
 
 typedef struct s_game
 {
+	bool				collected_all;
+	size_t				collected;
+	size_t				goal;
 	t_v2f				tiles_traveled;
 	bool				keys[MAX_KEYS + MAX_MOUSE];
 	t_img				*screen;
@@ -252,6 +257,7 @@ int						rgb(unsigned char r, unsigned char g, unsigned char b);
 bool					draw_tile(char c, size_t x, size_t y, t_game *g);
 void					draw_map(t_game *g);
 void					draw_player(t_game *g);
+void					draw_infos(t_game *g);
 
 /* Utils */
 
@@ -261,4 +267,8 @@ void					pa_free(void **p);
 void					free_img(t_img *img, void *mlx);
 void					free_a_img(t_img **img, void *mlx);
 
+/* Vectors */
+t_v2i					fadd(t_v2f a, t_v2f b);
+t_v2i					fsub(t_v2f a, t_v2f b);
+t_v2i					i_add_s(t_v2i a, t_v2i b, size_t s);
 #endif

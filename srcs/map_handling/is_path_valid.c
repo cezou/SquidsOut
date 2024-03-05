@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 15:08:33 by cviegas           #+#    #+#             */
-/*   Updated: 2024/02/22 14:01:14 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/05 14:56:18 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,6 @@ bool	is_path_valid(char **map)
 
 	if (!init_map_data(map, &map_data, &valid))
 		return (0);
-	ft_print_s((const char **)map);
 	search_for_something(&map_data, map_data.x, map_data.y, 'E');
 	if (!map_data.found_it)
 		(merr("Player can't find the exit"), valid = 0);

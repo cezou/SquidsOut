@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 18:58:17 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/04 10:40:13 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/05 14:53:10 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ typedef struct s_map_data
 }			t_map_data;
 
 void		handle_map(const char *file, t_game *g);
+void		print_map(t_game *g);
 char		**create_map(const char *filename, t_game *g);
 bool		is_map_valid(char **map);
 bool		is_there_unvalid_chars(char **map);

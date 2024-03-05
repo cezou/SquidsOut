@@ -6,11 +6,36 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 17:38:25 by cviegas           #+#    #+#             */
-/*   Updated: 2024/02/16 17:53:34 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/05 19:00:31 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/squids_out.h"
+
+void	print_map(t_game *g)
+{
+	t_v2i	i;
+
+	i[0] = -1;
+	while (g->map.block[++i[0]])
+	{
+		i[1] = -1;
+		while (g->map.block[i[0]][++i[1]])
+		{
+			if (g->map.block[i[0]][i[1]] == '1')
+				ft_printf("🟫");
+			if (g->map.block[i[0]][i[1]] == '0')
+				ft_printf("🟦");
+			if (g->map.block[i[0]][i[1]] == 'P')
+				ft_printf("🐙");
+			if (g->map.block[i[0]][i[1]] == 'E')
+				ft_printf("🐚");
+			if (g->map.block[i[0]][i[1]] == 'C')
+				(ft_printf("🐟"), g->goal++);
+		}
+		ft_printf("\n");
+	}
+}
 
 static bool	isnt_ber_ended(const char *s)
 {

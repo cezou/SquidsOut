@@ -6,13 +6,14 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 18:28:32 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/01 12:23:14 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/05 15:22:56 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minisquidx.h"
 
-// Init the screen (same than xpm but the path is fixed to "textures/xpms/screen.xpm" and it also stores the adress)
+// Init the screen (same than xpm but the path is fixed to
+// "textures/xpms/screen.xpm" and it also stores the adress)
 t_img	*init_screen(t_game *g)
 {
 	t_img	*image;

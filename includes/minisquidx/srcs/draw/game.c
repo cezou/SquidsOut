@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 12:36:03 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/04 11:57:30 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/05 19:14:18 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ bool	draw_tile(char c, size_t x, size_t y, t_game *g)
 	else if (c == '0' || c == 'P')
 		draw_square(DARK_BLUE, x, y, g);
 	else if (c == 'E')
+		draw_square(BLUE, x, y, g);
+	else if (c == 'V')
 		draw_square(GREEN, x, y, g);
 	else if (c == 'C')
 		draw_square(ORANGE, x, y, g);
@@ -131,10 +133,8 @@ void	draw_scaled_img(t_img *spr, t_v2i pos, size_t scale, t_game *g)
 	}
 }
 
-void	idle_animation(t_game *g, t_sprites *s)
+void	idle_animation_play(t_game *g, t_sprites *s)
 {
-	if (is_pressed(XK_o, g) && !s->p_idle.is_playing)
-		(start_stopwatch(&s->p_idle.time), g->draw.spr->p_idle.is_playing = 1);
 	if (s->p_idle.is_playing)
 	{
 		update_stopwatch(&s->p_idle.time);
@@ -156,18 +156,56 @@ void	idle_animation(t_game *g, t_sprites *s)
 			s->p_idle.frame++;
 			start_stopwatch(&s->p_idle.time);
 		}
+		s->player->pixels = s->p_idle.sprite[s->p_idle.frame]->pixels;
 	}
-	s->player->pixels = s->p_idle.sprite[s->p_idle.frame]->pixels;
 }
 
-void	update_player_sprite(t_game *g, t_sprites *s)
+void	idle_animation(t_game *g, t_sprites *s)
 {
-	idle_animation(g, s);
+	if (s->p_idle.is_playing && (g->draw.p_vel[0] != 0
+			|| g->draw.p_vel[1] != 0))
+	{
+		s->p_idle.is_playing = 0;
+		s->p_idle.frame = 0;
+		s->p_idle.direction = 0;
+	}
+	if ((g->draw.p_vel[0] == 0 || g->draw.p_vel[1] == 0)
+		&& !s->p_idle.is_playing)
+		(start_stopwatch(&s->p_idle.time), g->draw.spr->p_idle.is_playing = 1);
+	idle_animation_play(g, s);
 }
 
 void	draw_player(t_game *g)
 {
-	update_player_sprite(g, g->draw.spr);
+	idle_animation(g, g->draw.spr);
 	draw_scaled_img(g->draw.spr->player, fsub(g->draw.p_pos,
 			(t_v2f){g->draw.x_offset, g->draw.y_offset}), 3, g);
+}
+
+void	draw_infos(t_game *g)
+{
+	char	*x;
+	char	*y;
+	char	*xplusy;
+
+	mlx_string_put(g->mlx, g->mlx_win, 48, 48, 0xFFFFFF, "Traveled");
+	xplusy = ft_itoa((int)(g->tiles_traveled[0] + g->tiles_traveled[1]));
+	if (!xplusy)
+		(perr("Itoa's Malloc Failed"), clean_and_exit_game(g, 1));
+	x = ft_itoa((int)g->tiles_traveled[0]);
+	if (!x)
+		(perr("Itoa's Malloc Failed"), free(xplusy), clean_and_exit_game(g, 1));
+	y = ft_itoa((int)g->tiles_traveled[1]);
+	if (!y)
+		(perr("Itoa's Malloc Failed"), free(xplusy), free(x),
+			clean_and_exit_game(g, 1));
+	// string put le nombre xplusy a cote de Traveled ≈
+	mlx_string_put(g->mlx, g->mlx_win, 100, 48, 0xFFFFFF, xplusy);
+	mlx_string_put(g->mlx, g->mlx_win, 48, 64, 0xFFFFFF, "X:");
+	mlx_string_put(g->mlx, g->mlx_win, 64, 64, 0xFFFFFF, x);
+	mlx_string_put(g->mlx, g->mlx_win, 48, 80, 0xFFFFFF, "Y:");
+	mlx_string_put(g->mlx, g->mlx_win, 64, 80, 0xFFFFFF, y);
+	free(xplusy);
+	free(x);
+	free(y);
 }

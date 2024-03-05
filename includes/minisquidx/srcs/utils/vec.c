@@ -1,21 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hooks.c                                            :+:      :+:    :+:   */
+/*   vec.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/30 17:41:46 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/05 15:25:00 by cviegas          ###   ########.fr       */
+/*   Created: 2024/03/05 15:29:11 by cviegas           #+#    #+#             */
+/*   Updated: 2024/03/05 17:48:15 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/squids_out.h"
+#include "../../minisquidx.h"
 
-void	hooks(t_game *g)
+t_v2i	fadd(t_v2f a, t_v2f b)
 {
-	mlx_hook(g->mlx_win, KeyPress, KeyPressMask, k_press, g);
-	mlx_hook(g->mlx_win, KeyRelease, KeyReleaseMask, k_release, g);
-	mlx_hook(g->mlx_win, DestroyNotify, StructureNotifyMask, exit_game, g);
-	mlx_loop_hook(g->mlx, update, g);
+	return ((t_v2i){a[0] + b[0], a[1] + b[1]});
+}
+
+t_v2i	fsub(t_v2f a, t_v2f b)
+{
+	return ((t_v2i){(a[0] - b[0]) * TILE_SIZE, (a[1] - b[1]) * TILE_SIZE});
+}
+
+t_v2i	i_add_s(t_v2i a, t_v2i b, size_t s)
+{
+	return ((t_v2i){(a[0] + b[0]) * s - s, (a[1] + b[1]) * s - s});
 }
