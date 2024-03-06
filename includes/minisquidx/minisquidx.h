@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 09:41:46 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/05 20:05:16 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/06 12:00:43 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,11 @@
 /* Key Defines */
 # define MAX_KEYS 65535
 # define MAX_MOUSE 6
-# define MOUSE_LEFT MAX_KEYS + 1
-# define MOUSE_RIGHT MAX_KEYS + 2
-# define MOUSE_MIDDLE MAX_KEYS + 3
-# define MOUSE_SCROLL_UP MAX_KEYS + 4
-# define MOUSE_SCROLL_DOWN MAX_KEYS + 5
+# define MOUSE_LEFT 65536
+# define MOUSE_RIGHT 65537
+# define MOUSE_MIDDLE 65538
+# define MOUSE_SCROLL_UP 65539
+# define MOUSE_SCROLL_DOWN 65540
 
 /* Print Color codes */
 # define BOLD "\033[1m"
@@ -86,41 +86,47 @@
 # undef DARK_PINK
 # undef DARK_BROWN
 
-// Redefine les couleurs mais avec ce format "(t_color)0xFF000000"
+// Redefine les couleurs mais avec ce format "0xFF000000"
 
-# define BLACK (t_color)0xFF000000
-# define WHITE (t_color)(0xFFFFFFFF)
-# define RED (t_color)(0xFF0000FF)
-# define GREEN (t_color)(0xFF00FF00)
-# define BLUE (t_color)(0xFFFF0000)
-# define YELLOW (t_color)(0xFF00FFFF)
-# define CYAN (t_color)(0xFFFFFF00)
-# define MAGENTA (t_color)(0xFFFF00FF)
-# define ORANGE (t_color)(0xFF00A5FF)
-# define PURPLE (t_color)(0xFF800080)
-# define PINK (t_color)(0xFFC71585)
-# define BROWN (t_color)(0xFFA52A2A)
-# define GREY (t_color)(0xFF808080)
-# define LIGHT_GREY (t_color)(0xFFD3D3D3)
-# define DARK_GREY (t_color)(0xFFA9A9A9)
-# define LIGHT_BLUE (t_color)(0xFFADD8E6)
-# define LIGHT_GREEN (t_color)(0xFF90EE90)
-# define LIGHT_YELLOW (t_color)(0xFFFFFFE0)
-# define LIGHT_CYAN (t_color)(0xFFE0FFFF)
-# define LIGHT_MAGENTA (t_color)(0xFFF08080)
-# define LIGHT_ORANGE (t_color)(0xFF20B2AA)
-# define LIGHT_PURPLE (t_color)(0xFF9370DB)
-# define LIGHT_PINK (t_color)(0xFFFFA07A)
-# define LIGHT_BROWN (t_color)(0xFFCD853F)
-# define DARK_BLUE (t_color)(0xFF00008B)
-# define DARK_GREEN (t_color)(0xFF006400)
-# define DARK_YELLOW (t_color)(0xFF8B0000)
-# define DARK_CYAN (t_color)(0xFF8B8B00)
-# define DARK_MAGENTA (t_color)(0xFF8B008B)
-# define DARK_ORANGE (t_color)(0xFF008B8B)
-# define DARK_PURPLE (t_color)(0xFF4B0082)
-# define DARK_PINK (t_color)(0xFF8B5F65)
-# define DARK_BROWN (t_color)(0xFF8B4513)
+# define BLACK 0xFF000000
+# define WHITE (0xFFFFFFFF)
+# define RED (0xFF0000FF)
+# define GREEN (0xFF00FF00)
+# define BLUE (0xFFFF0000)
+# define YELLOW (0xFF00FFFF)
+# define CYAN (0xFFFFFF00)
+# define MAGENTA (0xFFFF00FF)
+# define ORANGE (0xFF00A5FF)
+# define PURPLE (0xFF800080)
+# define PINK (0xFFC71585)
+# define BROWN (0xFFA52A2A)
+# define GREY (0xFF808080)
+# define LIGHT_GREY (0xFFD3D3D3)
+# define DARK_GREY (0xFFA9A9A9)
+# define LIGHT_BLUE (0xFFADD8E6)
+# define LIGHT_GREEN (0xFF90EE90)
+# define LIGHT_YELLOW (0xFFFFFFE0)
+# define LIGHT_CYAN (0xFFE0FFFF)
+# define LIGHT_MAGENTA (0xFFF08080)
+# define LIGHT_ORANGE (0xFF20B2AA)
+# define LIGHT_PURPLE (0xFF9370DB)
+# define LIGHT_PINK (0xFFFFA07A)
+# define LIGHT_BROWN (0xFFCD853F)
+# define DARK_BLUE (0xFF00008B)
+# define DARK_GREEN (0xFF006400)
+# define DARK_YELLOW (0xFF8B0000)
+# define DARK_CYAN (0xFF8B8B00)
+# define DARK_MAGENTA (0xFF8B008B)
+# define DARK_ORANGE (0xFF008B8B)
+# define DARK_PURPLE (0xFF4B0082)
+# define DARK_PINK (0xFF8B5F65)
+# define DARK_BROWN (0xFF8B4513)
+
+/* Vectors */
+t_v2i					fadd(t_v2f a, t_v2f b);
+t_v2i					fsub(t_v2f a, t_v2f b);
+t_v2i					i_add_s(t_v2i a, t_v2i b, size_t s);
+t_v2f					faddmul(t_v2f a, t_v2f b, float s);
 
 /* Structures */
 
@@ -257,6 +263,7 @@ int						rgb(unsigned char r, unsigned char g, unsigned char b);
 bool					draw_tile(char c, size_t x, size_t y, t_game *g);
 void					draw_map(t_game *g);
 void					draw_player(t_game *g);
+void					idle_animation(t_game *g, t_sprites *s);
 void					draw_infos(t_game *g);
 
 /* Utils */
@@ -267,8 +274,4 @@ void					pa_free(void **p);
 void					free_img(t_img *img, void *mlx);
 void					free_a_img(t_img **img, void *mlx);
 
-/* Vectors */
-t_v2i					fadd(t_v2f a, t_v2f b);
-t_v2i					fsub(t_v2f a, t_v2f b);
-t_v2i					i_add_s(t_v2i a, t_v2i b, size_t s);
 #endif

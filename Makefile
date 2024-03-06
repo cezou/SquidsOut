@@ -1,5 +1,6 @@
 # SQUIDS OUT
 NAME = so_long
+BONUS = squids_out
 
 # COMPILATION
 CC = cc 
@@ -19,11 +20,14 @@ MH_DIR = $(S_DIR)/map_handling
 M_DIR = maps
 T_DIR = textures
 O_DIR = objs
+E_DIR = $(S_DIR)/events
 
 
 # FILES
 SQUID_SRCS = $(D_SRC)/*.c $(D_DRAW)/*.c $(D_UTILS)/*.c
-SRCS = $(S_DIR)/*.c $(MH_DIR)/*.c
+SRCS = $(S_DIR)/*.c $(MH_DIR)/*.c $(E_DIR)/*.c
+MANDATORY_SRCS = $(S_DIR)/mandatory_only/*.c
+BONUS_SRCS = $(S_DIR)/squids_out_only/*.c
 LIBFT = $(L_DIR)/libft.a
 MLX = $(MLX_DIR)/minisquidx.a
 INCS = $(LIBFT) $(MLX)
@@ -60,16 +64,26 @@ $(LIBFT):
 
 $(NAME): $(SRCS) $(MLX)
 	@make --silent -C $(MLX_DIR); \
-	$(CC) $(CFLAGS) $(MLXFLAGS) -I${I_DIR} $(SRCS) ${INCS} -o $(NAME) ; \
+	$(CC) $(CFLAGS) $(MLXFLAGS) -I${I_DIR} $(SRCS) $(MANDATORY_SRCS) ${INCS} -o $(NAME) ; \
 	echo "$(GREEN)    ● Made SoLong$(RESET)"
+
+$(BONUS): $(SRCS) $(MLX)
+	@make --silent -C $(MLX_DIR); \
+	$(CC) $(CFLAGS) $(MLXFLAGS) -I${I_DIR} $(SRCS) $(BONUS_SRCS) ${INCS} -o $(BONUS) ; \
+	echo "$(GREEN)    ● Made SquidsOut$(RESET)"
+
+bonus: $(BONUS)
 
 clean:
 	@if [ -f $(NAME) ]; then \
 			rm -f $(NAME); \
 			echo "$(BOLD)$(PINK)● Adios Squidos 🦑$(RESET)"; \
 	fi
+	@if [ -f $(BONUS) ]; then \
+			rm -f $(BONUS); \
+	fi
 
-rmf:
+rmf: clean
 	@make --silent -C $(MLX_DIR) rmf
 
 fclean: clean

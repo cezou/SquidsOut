@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 18:28:32 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/04 12:05:32 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/06 11:46:23 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_color	get_color(t_img img, t_v2i pos)
 {
 	if (pos[0] < 0 || pos[0] >= img.size[0] || pos[1] < 0
 		|| pos[1] >= img.size[1])
-		return (BLACK);
+		return ((t_color)BLACK);
 	return (img.pixels[pos[1] * img.size[0] + pos[0]]);
 }
 

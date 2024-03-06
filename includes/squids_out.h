@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 18:58:17 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/05 14:53:10 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/06 11:57:22 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # define H_LIMIT 100
 # define S_SIZE 32
 # define SPEED 7
-# define BOTH 3 / 4
+# define BOTH 0.75
 
 /* FUNCTIONS */
 /* 	Game & Mlx Handling */
@@ -66,6 +66,7 @@ void		hooks(t_game *g);
 void		events(t_game *g);
 void		p_movements(t_game *g);
 void		collisions(t_game *g);
+void		collect(t_game *g);
 void		escape(t_game *g);
 
 // enum
