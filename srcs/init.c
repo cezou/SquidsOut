@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 17:37:24 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/06 15:57:33 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/06 17:22:06 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static void	get_p_pos(t_game *g)
 	}
 }
 
-void	init_data(t_game *g)
+void	init_data(t_game *g, char *program_name)
 {
 	get_p_pos(g);
 	g->draw.p_new_pos = g->draw.p_pos;
@@ -52,7 +52,8 @@ void	init_data(t_game *g)
 	g->draw.offset[0] = 0;
 	g->draw.offset[1] = 0;
 	g->tiles_traveled = (t_v2f){0, 0};
-	g->time.time = clock();
+	if (!ft_strncmp(program_name, "squids_out", 10))
+		g->time.time = clock();
 }
 
 void	init_game(t_game *g)
@@ -68,6 +69,7 @@ void	init_game(t_game *g)
 	g->screen = NU;
 	g->draw.spr->squids = NU;
 	g->draw.spr->player = NU;
+	g->draw.spr->water = NU;
 	g->draw.spr->bg = NU;
 	g->draw.spr->cage = NU;
 	g->draw.spr->block = NU;
@@ -101,7 +103,8 @@ void	init_window(t_game *g)
 	init_player(g);
 	g->screen = init_screen(g);
 	g->draw.spr->block = init_xpm("block", g);
-	g->draw.spr->cage = init_xpm("water_mc", g);
+	g->draw.spr->water = init_xpm("water_mc", g);
+	g->draw.spr->cage = init_xpm("squid_in_cage", g);
 	g->mlx_win = mlx_new_window(g->mlx, W_WIDTH, W_HEIGHT,
 			"Squids Out (pre-alpha)");
 	if (!g->mlx_win)

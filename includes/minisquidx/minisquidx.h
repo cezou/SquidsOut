@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 09:41:46 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/06 12:00:43 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/06 16:30:25 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,6 +179,7 @@ typedef struct s_sprites
 {
 	t_img				*bg;
 	t_img				*block;
+	t_img				*water;
 	t_img				*player;
 	t_animated_img		p_idle;
 	t_img				**squids;

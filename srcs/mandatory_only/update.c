@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 18:49:00 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/06 11:27:17 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/06 16:31:28 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void	events(t_game *g)
 
 void	update_game_data(t_game *g)
 {
-	update_elapsed_time(g);
 	events(g);
 	update_camera(g);
 }

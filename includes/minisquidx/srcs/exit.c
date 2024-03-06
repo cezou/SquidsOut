@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 17:40:31 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/05 14:55:23 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/06 17:22:26 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 static void	destroy_spr(t_game *g)
 {
+	free_img(g->draw.spr->water, g->mlx);
 	free_img(g->draw.spr->bg, g->mlx);
 	free_img(g->draw.spr->block, g->mlx);
 	free_a_img(g->draw.spr->p_idle.sprite, g->mlx);

@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 18:58:17 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/06 11:57:22 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/06 16:40:38 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 /* 	Game & Mlx Handling */
 
 void		init_game(t_game *g);
-void		init_data(t_game *g);
+void		init_data(t_game *g, char *program_name);
 void		init_window(t_game *g);
 
 /* Check and Init Map */
