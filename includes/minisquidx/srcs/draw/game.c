@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 12:36:03 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/06 12:03:31 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/06 12:07:05 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	draw_player(t_game *g)
 {
-	idle_animation(g, g->draw.spr);
 	draw_scaled_img(g->draw.spr->player, fsub(g->draw.p_pos,
 			(t_v2f){g->draw.x_offset, g->draw.y_offset}), 3, g);
 }

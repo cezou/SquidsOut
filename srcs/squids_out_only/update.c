@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 18:49:00 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/06 11:35:25 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/06 12:07:30 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ void	update_screen(t_game *g)
 {
 	update_game_data(g);
 	draw_map(g);
+	idle_animation(g, g->draw.spr);
 	draw_player(g);
 }
 
