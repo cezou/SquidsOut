@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 17:37:24 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/06 12:50:36 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/06 15:57:33 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,8 +101,9 @@ void	init_window(t_game *g)
 	init_player(g);
 	g->screen = init_screen(g);
 	g->draw.spr->block = init_xpm("block", g);
+	g->draw.spr->cage = init_xpm("water_mc", g);
 	g->mlx_win = mlx_new_window(g->mlx, W_WIDTH, W_HEIGHT,
 			"Squids Out (pre-alpha)");
 	if (!g->mlx_win)
-		clean_and_exit_game(g, FAIL);
+		(perr("Mlx Window couldn't start"), clean_and_exit_game(g, FAIL));
 }
