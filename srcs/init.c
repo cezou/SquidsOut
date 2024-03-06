@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 17:37:24 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/06 11:27:48 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/06 12:50:36 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,14 @@ void	init_data(t_game *g)
 
 void	init_game(t_game *g)
 {
+	size_t	i;
+
 	g->draw.spr = malloc(sizeof(t_sprites));
 	if (!g->draw.spr)
 		return (exit(FAIL));
-	ft_bzero(g->draw.spr->p_idle.sprite, 8);
+	i = 0;
+	while (i < 9)
+		g->draw.spr->p_idle.sprite[i++] = NU;
 	g->screen = NU;
 	g->draw.spr->squids = NU;
 	g->draw.spr->player = NU;
@@ -94,8 +98,8 @@ void	init_player(t_game *g)
 
 void	init_window(t_game *g)
 {
-	g->screen = init_screen(g);
 	init_player(g);
+	g->screen = init_screen(g);
 	g->draw.spr->block = init_xpm("block", g);
 	g->mlx_win = mlx_new_window(g->mlx, W_WIDTH, W_HEIGHT,
 			"Squids Out (pre-alpha)");

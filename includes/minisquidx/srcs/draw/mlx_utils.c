@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 18:28:32 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/05 15:22:56 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/06 12:57:39 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ t_img	*init_xpm(const char *path, t_game *g)
 	image->img = mlx_xpm_file_to_image(g->mlx, full_path, &trash[0], &trash[1]);
 	free(full_path);
 	if (!image->img)
-		(free(image), clean_and_exit_game(g, FAIL));
+		(perr("Image init failed"), free(image), clean_and_exit_game(g, FAIL));
 	image->size = (t_v2i){trash[0], trash[1]};
 	image->pixels = (t_color *)(t_hexa *)mlx_get_data_addr(image->img,
 			&trash[1], &trash[1], &trash[1]);
@@ -82,7 +82,8 @@ t_img	*init_animated_xpm(const char *folder_path, size_t file_nb, t_game *g)
 	image->img = mlx_xpm_file_to_image(g->mlx, full_path, &trash[0], &trash[1]);
 	free(full_path);
 	if (!image->img)
-		(perr("Image init failed"), free(image), clean_and_exit_game(g, FAIL));
+		(free(image), (perr("Image init failed"), clean_and_exit_game(g,
+					FAIL)));
 	image->size = (t_v2i){trash[0], trash[1]};
 	image->pixels = (t_color *)(t_hexa *)mlx_get_data_addr(image->img,
 			&trash[1], &trash[1], &trash[1]);

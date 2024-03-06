@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 10:52:14 by cviegas           #+#    #+#             */
-/*   Updated: 2024/02/26 12:10:42 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/06 12:38:19 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,6 @@ void	free_a_img(t_img **img, void *mlx)
 	size_t	i;
 
 	i = 0;
-	while (img[i])
+	while (img[i] && img[i]->img)
 		free_img(img[i++], mlx);
 }
