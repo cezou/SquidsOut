@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 18:22:16 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/06 12:02:46 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/06 12:14:39 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	avoid_theses_tiles(char *tiles_to_avoid, t_game *g)
 void	collisions(t_game *g)
 {
 	g->draw.p_new_pos = faddmul(g->draw.p_pos, g->draw.p_vel, elapsed_time(g));
-	avoid_theses_tiles("1E", g);
+	avoid_theses_tiles("1", g);
 	collect(g);
 	g->draw.p_pos = g->draw.p_new_pos;
 	if (!g->draw.p_vel[0] && !g->draw.p_vel[1])
